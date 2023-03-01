@@ -1,0 +1,11 @@
+
+@use "sass:math";
+
+html, body {
+  margin: 0 auto;
+}
+
+// px -> rem
+@function r($px) {
+  @return to-fixed(math.div($px,75), 2) * 1rem;
+}

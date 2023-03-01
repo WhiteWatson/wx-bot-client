@@ -31,11 +31,12 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.js",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/electron/preload.js"  ],
+, "src/electron/preload.js" ],
   "exclude": [
     "node_modules"
   ]

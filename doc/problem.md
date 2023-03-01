@@ -16,3 +16,31 @@ devServer: {
 
 ## loaderContext.getOptions is not a function
 降低ts-loader版本 `pnpm i ts-loader@~8.2.0`
+
+## webpack ＜ 5 used to include polyfills for node.js core modules by default.
+webpack5升级之后核心模块不在自动安装
+
+`npm install node-polyfill-webpack-plugin`
+
+vue.config.js 文件内容更新
+```
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+ 
+const { defineConfig } = require('@vue/cli-service')
+ 
+ 
+ 
+module.exports = defineConfig({
+ 
+  configureWebpack: {
+    plugins: [new NodePolyfillPlugin()],
+  },
+ 
+  transpileDependencies: true,
+ 
+  devServer: {
+    proxy: 'http://localhost:3000' // 配置访问的服务器地址
+  }
+ 
+})
+```
