@@ -35,7 +35,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/electron/preload.js"  ],
   "exclude": [
     "node_modules"
   ]
