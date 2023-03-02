@@ -44,3 +44,7 @@ module.exports = defineConfig({
  
 })
 ```
+
+## 打包wechaty 报错#/usr/bin...
+![markdown picture](./images/concurrency.png)
+
