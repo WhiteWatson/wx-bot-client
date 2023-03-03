@@ -48,3 +48,12 @@ module.exports = defineConfig({
 ## 打包wechaty 报错#/usr/bin...
 ![markdown picture](./images/concurrency.png)
 
+## electron: --openssl-legacy-provider is not allowed in NODE_OPTIONS
+```
+# 👇️ for macOS, Linux or Windows Git Bash
+unset NODE_OPTIONS
+```
+https://bobbyhadz.com/blog/node-openssl-legacy-provider-is-not-allowed-in-node-options
+
+## this.timer.unref
+watchdog版本问题，需要手动升级到0.9.2，同时注意把老版本删除

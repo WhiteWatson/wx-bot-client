@@ -1,5 +1,6 @@
 import { WechatyBuilder } from "wechaty";
 // import QRCode from "qrcode";
+import { CommonModule } from "@/store/modules/common";
 
 const wxBot = WechatyBuilder.build({
   name: "wx-bot", // generate xxxx.memory-card.json and save login data for the next login
@@ -10,16 +11,13 @@ const wxBot = WechatyBuilder.build({
 });
 
 async function wxBotInit() {
-  console.log("wxBot", wxBot);
-
   wxBot
     .on("scan", async (qrcode, status) => {
       console.log(qrcode, status);
       const url = `https://wechaty.js.org/qrcode/${encodeURIComponent(qrcode)}`;
+      const qrcodeUrl = `${status}\n${url}`;
       console.log(`Scan QR Code to login: ${status}\n${url}`);
-      // console.log(
-      //   await QRCode.toString(qrcode, { type: "terminal", small: true })
-      // );
+      CommonModule.SET_LOGINQRCODE(qrcodeUrl);
     })
     .on("login", async (user) => {
       console.log(`User ${user} logged in`);
