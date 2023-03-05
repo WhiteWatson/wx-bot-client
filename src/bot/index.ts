@@ -1,6 +1,6 @@
 import { WechatyBuilder } from "wechaty";
 // import QRCode from "qrcode";
-import { CommonModule } from "@/store/modules/common";
+import store from "@/store";
 
 const wxBot = WechatyBuilder.build({
   name: "wx-bot", // generate xxxx.memory-card.json and save login data for the next login
@@ -10,14 +10,18 @@ const wxBot = WechatyBuilder.build({
   puppet: "wechaty-puppet-wechat",
 });
 
+const _this = this as any;
+
 async function wxBotInit() {
   wxBot
     .on("scan", async (qrcode, status) => {
       console.log(qrcode, status);
-      const url = `https://wechaty.js.org/qrcode/${encodeURIComponent(qrcode)}`;
+      const url = `https://api.pwmqr.com/qrcode/create/?url=${encodeURIComponent(qrcode)}`;
       const qrcodeUrl = `${status}\n${url}`;
       console.log(`Scan QR Code to login: ${status}\n${url}`);
-      CommonModule.SET_LOGINQRCODE(qrcodeUrl);
+      // CommonModule.SET_LOGINQRCODE(qrcodeUrl);
+      console.log('qrcodeurl', url);
+      store.commit('SET_LOGINQRCODE', url)
     })
     .on("login", async (user) => {
       console.log(`User ${user} logged in`);
