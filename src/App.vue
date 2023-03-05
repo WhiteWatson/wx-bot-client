@@ -1,10 +1,19 @@
 <template>
-  <div id="app">
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" />
-  </div>
+  <v-app>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss"></style>
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+});
+</script>

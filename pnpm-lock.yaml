@@ -31,9 +31,12 @@ specifiers:
   vue: ^2.6.14
   vue-class-component: ^7.2.3
   vue-cli-plugin-electron-builder: ^2.1.1
+  vue-cli-plugin-vuetify: ~2.5.8
   vue-property-decorator: ^9.1.2
   vue-router: ^3.5.1
   vue-template-compiler: ^2.6.14
+  vuetify: ^2.6.0
+  vuetify-loader: ^1.7.0
   vuex: ^3.6.2
   vuex-module-decorators: ^2.0.0
   watchdog: 0.9.2
@@ -50,6 +53,7 @@ dependencies:
   vue-class-component: registry.npmmirror.com/vue-class-component/7.2.6_vue@2.7.14
   vue-property-decorator: registry.npmmirror.com/vue-property-decorator/9.1.2_jtyyyychrtcflhl7vfprhmeb3y
   vue-router: registry.npmmirror.com/vue-router/3.6.5_vue@2.7.14
+  vuetify: registry.npmmirror.com/vuetify/2.6.14_vue@2.7.14
   vuex: registry.npmmirror.com/vuex/3.6.2_vue@2.7.14
   vuex-module-decorators: registry.npmmirror.com/vuex-module-decorators/2.0.0_vue@2.7.14+vuex@3.6.2
   watchdog: registry.npmmirror.com/watchdog/0.9.2
@@ -80,7 +84,9 @@ devDependencies:
   ts-node: registry.npmmirror.com/ts-node/10.9.1_pyihgck42atnyiupggtgmd5xty
   typescript: registry.npmmirror.com/typescript/4.5.5
   vue-cli-plugin-electron-builder: registry.npmmirror.com/vue-cli-plugin-electron-builder/2.1.1
+  vue-cli-plugin-vuetify: registry.npmmirror.com/vue-cli-plugin-vuetify/2.5.8_kti3djms6sk4xav537y54eal3a
   vue-template-compiler: registry.npmmirror.com/vue-template-compiler/2.7.14
+  vuetify-loader: registry.npmmirror.com/vuetify-loader/1.9.2_vue@2.7.14+vuetify@2.6.14
 
 packages:
 
@@ -3754,6 +3760,12 @@ packages:
       function-bind: registry.npmmirror.com/function-bind/1.1.1
       get-intrinsic: registry.npmmirror.com/get-intrinsic/1.2.0
 
+  registry.npmmirror.com/callsite/1.0.0:
+    resolution: {integrity: sha512-0vdNRFXn5q+dtOqjfFtmtlI9N2eVZ7LMyEV2iKC5mEEFvSg/69Ml6b/WU2qF8W1nLRa0wiSrDT3Y5jOHZCwKPQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/callsite/-/callsite-1.0.0.tgz}
+    name: callsite
+    version: 1.0.0
+    dev: true
+
   registry.npmmirror.com/callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/callsites/-/callsites-3.1.0.tgz}
     name: callsites
@@ -5056,6 +5068,14 @@ packages:
         optional: true
     dependencies:
       ms: registry.npmmirror.com/ms/2.1.2
+
+  registry.npmmirror.com/decache/4.6.1:
+    resolution: {integrity: sha512-ohApBM8u9ygepJCjgBrEZSSxPjc0T/PJkD+uNyxXPkqudyUpdXpwJYp0VISm2WrPVzASU6DZyIi6BWdyw7uJ2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/decache/-/decache-4.6.1.tgz}
+    name: decache
+    version: 4.6.1
+    dependencies:
+      callsite: registry.npmmirror.com/callsite/1.0.0
+    dev: true
 
   registry.npmmirror.com/decamelize/1.2.0:
     resolution: {integrity: sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/decamelize/-/decamelize-1.2.0.tgz}
@@ -6493,6 +6513,18 @@ packages:
       flat-cache: registry.npmmirror.com/flat-cache/3.0.4
     dev: true
 
+  registry.npmmirror.com/file-loader/6.2.0:
+    resolution: {integrity: sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/file-loader/-/file-loader-6.2.0.tgz}
+    name: file-loader
+    version: 6.2.0
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: registry.npmmirror.com/loader-utils/2.0.4
+      schema-utils: registry.npmmirror.com/schema-utils/3.1.1
+    dev: true
+
   registry.npmmirror.com/file-type/16.5.4:
     resolution: {integrity: sha512-/yFHK0aGjFEgDJjEKP0pWCplsPFPhwyfwevf/pVxiN0tmE4L9LmwWxWukdJSHdoCli4VgQLehjJtwQBnqmsKcw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/file-type/-/file-type-16.5.4.tgz}
     name: file-type
@@ -7777,6 +7809,13 @@ packages:
     name: ini
     version: 2.0.0
     engines: {node: '>=10'}
+    dev: true
+
+  registry.npmmirror.com/interpret/1.4.0:
+    resolution: {integrity: sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/interpret/-/interpret-1.4.0.tgz}
+    name: interpret
+    version: 1.4.0
+    engines: {node: '>= 0.10'}
     dev: true
 
   registry.npmmirror.com/ipaddr.js/1.9.1:
@@ -9795,6 +9834,18 @@ packages:
       boolbase: registry.npmmirror.com/boolbase/1.0.0
     dev: true
 
+  registry.npmmirror.com/null-loader/4.0.1:
+    resolution: {integrity: sha512-pxqVbi4U6N26lq+LmgIbB5XATP0VdZKOG25DhHi8btMmJJefGArFyDg1yc4U3hWCJbMqSrw0qyrz1UQX+qYXqg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/null-loader/-/null-loader-4.0.1.tgz}
+    name: null-loader
+    version: 4.0.1
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: registry.npmmirror.com/loader-utils/2.0.4
+      schema-utils: registry.npmmirror.com/schema-utils/3.1.1
+    dev: true
+
   registry.npmmirror.com/oauth-sign/0.9.0:
     resolution: {integrity: sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/oauth-sign/-/oauth-sign-0.9.0.tgz}
     name: oauth-sign
@@ -11482,6 +11533,15 @@ packages:
       picomatch: registry.npmmirror.com/picomatch/2.3.1
     dev: true
 
+  registry.npmmirror.com/rechoir/0.6.2:
+    resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rechoir/-/rechoir-0.6.2.tgz}
+    name: rechoir
+    version: 0.6.2
+    engines: {node: '>= 0.10'}
+    dependencies:
+      resolve: registry.npmmirror.com/resolve/1.22.1
+    dev: true
+
   registry.npmmirror.com/redux-observable/2.0.0:
     resolution: {integrity: sha512-FJz4rLXX+VmDDwZS/LpvQsKnSanDOe8UVjiLryx1g3seZiS69iLpMrcvXD5oFO7rtkPyRdo/FmTqldnT3X3m+w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/redux-observable/-/redux-observable-2.0.0.tgz}
     name: redux-observable
@@ -12179,6 +12239,18 @@ packages:
     resolution: {integrity: sha512-QHsz8GgQIGKlRi24yFc6a6lN69Idnx634w49ay6+jA5yFh7a1UY+4Rp6HPx/L/1zcEDPEij8cIsiqR6bQsE5VQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/shell-quote/-/shell-quote-1.8.0.tgz}
     name: shell-quote
     version: 1.8.0
+    dev: true
+
+  registry.npmmirror.com/shelljs/0.8.5:
+    resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/shelljs/-/shelljs-0.8.5.tgz}
+    name: shelljs
+    version: 0.8.5
+    engines: {node: '>=4'}
+    hasBin: true
+    dependencies:
+      glob: registry.npmmirror.com/glob/7.2.3
+      interpret: registry.npmmirror.com/interpret/1.4.0
+      rechoir: registry.npmmirror.com/rechoir/0.6.2
     dev: true
 
   registry.npmmirror.com/side-channel/1.0.4:
@@ -13825,6 +13897,30 @@ packages:
       - webpack-command
     dev: true
 
+  registry.npmmirror.com/vue-cli-plugin-vuetify/2.5.8_kti3djms6sk4xav537y54eal3a:
+    resolution: {integrity: sha512-uqi0/URJETJBbWlQHD1l0pnY7JN8Ytu+AL1fw50HFlGByPa8/xx+mq19GkFXA9FcwFT01IqEc/TkxMPugchomg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.5.8.tgz}
+    id: registry.npmmirror.com/vue-cli-plugin-vuetify/2.5.8
+    name: vue-cli-plugin-vuetify
+    version: 2.5.8
+    peerDependencies:
+      sass-loader: '*'
+      vue: '*'
+      vuetify-loader: '*'
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      sass-loader:
+        optional: true
+      vuetify-loader:
+        optional: true
+    dependencies:
+      null-loader: registry.npmmirror.com/null-loader/4.0.1
+      sass-loader: registry.npmmirror.com/sass-loader/12.6.0_sass@1.58.3
+      semver: registry.npmmirror.com/semver/7.3.8
+      shelljs: registry.npmmirror.com/shelljs/0.8.5
+      vue: registry.npmmirror.com/vue/2.7.14
+      vuetify-loader: registry.npmmirror.com/vuetify-loader/1.9.2_vue@2.7.14+vuetify@2.6.14
+    dev: true
+
   registry.npmmirror.com/vue-eslint-parser/8.3.0_eslint@7.32.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-eslint-parser/-/vue-eslint-parser-8.3.0.tgz}
     id: registry.npmmirror.com/vue-eslint-parser/8.3.0
@@ -14012,6 +14108,45 @@ packages:
     dependencies:
       '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/2.7.14
       csstype: registry.npmmirror.com/csstype/3.1.1
+
+  registry.npmmirror.com/vuetify-loader/1.9.2_vue@2.7.14+vuetify@2.6.14:
+    resolution: {integrity: sha512-8PP2w7aAs/rjA+Izec6qY7sHVb75MNrGQrDOTZJ5IEnvl+NiFhVpU2iWdRDZ3eMS842cWxSWStvkr+KJJKy+Iw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuetify-loader/-/vuetify-loader-1.9.2.tgz}
+    id: registry.npmmirror.com/vuetify-loader/1.9.2
+    name: vuetify-loader
+    version: 1.9.2
+    peerDependencies:
+      gm: ^1.23.0
+      pug: ^2.0.0 || ^3.0.0
+      sharp: '*'
+      vue: ^2.7.2
+      vuetify: ^1.3.0 || ^2.0.0
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      gm:
+        optional: true
+      pug:
+        optional: true
+      sharp:
+        optional: true
+    dependencies:
+      acorn: registry.npmmirror.com/acorn/8.8.2
+      acorn-walk: registry.npmmirror.com/acorn-walk/8.2.0
+      decache: registry.npmmirror.com/decache/4.6.1
+      file-loader: registry.npmmirror.com/file-loader/6.2.0
+      loader-utils: registry.npmmirror.com/loader-utils/2.0.4
+      vue: registry.npmmirror.com/vue/2.7.14
+      vuetify: registry.npmmirror.com/vuetify/2.6.14_vue@2.7.14
+    dev: true
+
+  registry.npmmirror.com/vuetify/2.6.14_vue@2.7.14:
+    resolution: {integrity: sha512-nr6wU3uTzhhEPssH23cW0Ee/hCrayp7cjl3nNjM2OmNwiJlV91tZiL1VO3597SqZyjh1xIa+m9J2rpKTSdIlrA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuetify/-/vuetify-2.6.14.tgz}
+    id: registry.npmmirror.com/vuetify/2.6.14
+    name: vuetify
+    version: 2.6.14
+    peerDependencies:
+      vue: ^2.6.4
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.14
 
   registry.npmmirror.com/vuex-module-decorators/2.0.0_vue@2.7.14+vuex@3.6.2:
     resolution: {integrity: sha512-awfjlJR9PlX2tDNzRk5fUnksO4TC5Z93Q3ZycvROCiLId7MZ1GdY4sHpEvPqm02UZ8jF+BkuyN5ezghOAk3zeQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuex-module-decorators/-/vuex-module-decorators-2.0.0.tgz}
