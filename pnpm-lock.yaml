@@ -13,6 +13,7 @@ specifiers:
   '@vue/cli-service': ~5.0.0
   '@vue/eslint-config-prettier': ^6.0.0
   '@vue/eslint-config-typescript': ^9.1.0
+  animate.css: ^4.1.1
   electron: 13.0.0
   electron-devtools-installer: ^3.1.0
   eslint: ^7.32.0
@@ -45,6 +46,7 @@ specifiers:
 
 dependencies:
   '@types/node': registry.npmmirror.com/@types/node/18.14.5
+  animate.css: registry.npmmirror.com/animate.css/4.1.1
   node-polyfill-webpack-plugin: registry.npmmirror.com/node-polyfill-webpack-plugin/2.0.1
   qrcode: registry.npmmirror.com/qrcode/1.5.1
   qrcode-terminal: registry.npmmirror.com/qrcode-terminal/0.12.0
@@ -2789,6 +2791,12 @@ packages:
       require-from-string: registry.npmmirror.com/require-from-string/2.0.2
       uri-js: registry.npmmirror.com/uri-js/4.4.1
     dev: true
+
+  registry.npmmirror.com/animate.css/4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/animate.css/-/animate.css-4.1.1.tgz}
+    name: animate.css
+    version: 4.1.1
+    dev: false
 
   registry.npmmirror.com/ansi-align/3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ansi-align/-/ansi-align-3.0.1.tgz}

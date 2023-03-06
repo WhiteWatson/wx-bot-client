@@ -30,6 +30,7 @@ async function wxBotInit() {
       }
       try {
         console.log(`Message: ${message}`);
+        store.commit("SET_MESSAGELIST", message);
       } catch (e) {
         console.error(e);
       }

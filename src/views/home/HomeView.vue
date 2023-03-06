@@ -18,7 +18,7 @@
     <div class="banner">
       <div class="title">
         <div class="text-h2">WxBotClient</div>
-        <div class="body-1 mt-3">你的傻瓜式微信AI管家</div>
+        <div class="body-1 mt-3">你的傻瓜式微信AI管家sssss</div>
       </div>
       <div class="start my-6">
         <v-btn
@@ -116,6 +116,7 @@ export default class Home extends Vue {
   loggedOut() {
     this.$store.commit("SET_LOGINQRCODE", "");
     wxBot.logout();
+    wxBot.stop();
   }
 
   beforeMount() {
