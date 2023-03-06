@@ -1,14 +1,36 @@
 <template>
   <div class="home">
+    <header class="header">
+      <div class="header-content">
+        <div v-if="userInfo" class="name">{{ userInfo.payload.name }}</div>
+        <div class="logout">
+          <v-btn
+            v-if="userInfo"
+            class="ma-2"
+            transition="fade-transition"
+            color="white"
+            @click="loggedOut"
+            >退出登录</v-btn
+          >
+        </div>
+      </div>
+    </header>
     <div class="banner">
       <div class="title">
         <div class="text-h2">WxBotClient</div>
-        <div class="body-1 mt-3">微信AI管家</div>
+        <div class="body-1 mt-3">你的傻瓜式微信AI管家</div>
       </div>
       <div class="start my-6">
-        <v-btn elevation="3" raised rounded x-large @click="start"
-          >开始使用吧</v-btn
-        >
+        <v-btn
+          elevation="3"
+          raised
+          rounded
+          x-large
+          transition="scale-transition"
+          :loading="startLoading"
+          @click="start"
+          >{{ btnText || "开始使用吧" }}
+        </v-btn>
       </div>
       <svg
         class="banner-svg"
@@ -33,6 +55,15 @@
       </svg>
     </div>
     <div class="content">
+      <div
+        v-if="welcomeText"
+        class="steps-text"
+        :style="{
+          animation: `steps-width 2s steps(${welcomeText.length}) forwards`,
+        }"
+      >
+        {{ welcomeText }}
+      </div>
       <img
         class="qrcode pt-5"
         :src="
@@ -42,19 +73,49 @@
         alt=""
       />
     </div>
+    <v-btn elevation="3" raised x-large @click="loggedOut">登出</v-btn>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { wxBot, wxBotInit } from "@/bot";
 
 @Component({
   components: {},
 })
 export default class Home extends Vue {
+  btnText = "";
+  startLoading = false;
+  welcomeText = "";
+
+  @Watch("loginQrcodeImg")
+  onLoginQrcodeImgChanged(val: string) {
+    if (val) {
+      this.startLoading = false;
+      this.btnText = "刷新二维码";
+    } else {
+      this.btnText = "";
+    }
+  }
+
+  @Watch("userInfo", { immediate: true, deep: true })
+  onLoggedIn(val: any) {
+    if (val) {
+      this.startLoading = false;
+      this.btnText = "登录成功";
+      this.welcomeText = `您好${val.payload.name}，这里是微信AI管家`;
+    }
+  }
+
   start() {
+    this.startLoading = true;
     wxBotInit();
+  }
+
+  loggedOut() {
+    this.$store.commit("SET_LOGINQRCODE", "");
+    wxBot.logout();
   }
 
   beforeMount() {
@@ -64,9 +125,28 @@ export default class Home extends Vue {
   get loginQrcodeImg() {
     return this.$store.state.loginQrcode;
   }
+
+  get userInfo() {
+    return this.$store.state.userInfo;
+  }
 }
 </script>
 <style lang="scss" scoped>
+.header {
+  max-height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  &-content {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .banner {
   min-height: 350px;
   background-image: linear-gradient(#712cf9, rgba(113, 44, 249, 0.95));

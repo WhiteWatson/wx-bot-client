@@ -5,16 +5,26 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    userInfo: {},
+    userInfo: null,
     loginQrcode: "",
+    messageList: [],
   },
   getters: {},
   mutations: {
-    SET_USERINFO(userInfo: any) {
-      console.log("userInfo enter", userInfo);
-      this.userInfo = userInfo;
+    SET_MESSAGELIST(state, messageList) {
+      state.messageList = messageList;
     },
-    SET_LOGINQRCODE(state: any, qrcode: any) {
+    SET_LOGGED_IN(state, userInfo) {
+      state.userInfo = userInfo;
+    },
+    SET_LOGGEN_OUT(state) {
+      state.userInfo = null;
+    },
+    SET_USERINFO(state, userInfo) {
+      console.log("userInfo enter", userInfo);
+      state.userInfo = userInfo;
+    },
+    SET_LOGINQRCODE(state, qrcode) {
       console.log("code enter", qrcode);
       state.loginQrcode = qrcode;
     },

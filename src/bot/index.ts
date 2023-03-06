@@ -10,21 +10,18 @@ const wxBot = WechatyBuilder.build({
   puppet: "wechaty-puppet-wechat",
 });
 
-const _this = this as any;
-
 async function wxBotInit() {
   wxBot
     .on("scan", async (qrcode, status) => {
-      console.log(qrcode, status);
-      const url = `https://api.pwmqr.com/qrcode/create/?url=${encodeURIComponent(qrcode)}`;
-      const qrcodeUrl = `${status}\n${url}`;
-      console.log(`Scan QR Code to login: ${status}\n${url}`);
-      // CommonModule.SET_LOGINQRCODE(qrcodeUrl);
-      console.log('qrcodeurl', url);
-      store.commit('SET_LOGINQRCODE', url)
+      const url = `https://api.pwmqr.com/qrcode/create/?url=${encodeURIComponent(
+        qrcode
+      )}`;
+      console.log("qrcodeurl", url);
+      store.commit("SET_LOGINQRCODE", url);
     })
     .on("login", async (user) => {
       console.log(`User ${user} logged in`);
+      store.commit("SET_LOGGED_IN", user);
     })
     .on("message", async (message) => {
       if (message.text().startsWith("/ping")) {
