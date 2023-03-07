@@ -18,7 +18,7 @@
     <div class="banner">
       <div class="title">
         <div class="text-h2">WxBotClient</div>
-        <div class="body-1 mt-3">你的傻瓜式微信AI管家sssss</div>
+        <div class="body-1 mt-3">你的傻瓜式微信AI管家</div>
       </div>
       <div class="start my-6">
         <v-btn
@@ -76,6 +76,52 @@
         <div></div>
       </transition>
     </div>
+    <v-footer dark padless>
+      <v-card flat tile class="indigo lighten-1 white--text text-center">
+        <v-card-text>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
+          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
+          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
+          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
+          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
+          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
+          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
+          parturient montes, nascetur ridiculus mus.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
+
+    <v-dialog v-model="dialog" persistent class="v-dialog" width="500">
+      <div class="dialog-content">
+        <div class="dialog-title">~WOW~</div>
+        <div class="dialog-desc">
+          欢迎使用AI管家，AI管家使用ChatGPT，请为你的管家绑定ChatGPT API
+          key，为了防止你的管家失联，请勿关闭此程序。
+        </div>
+        <div class="dialog-footer">
+          <v-btn text @click="$router.push('/')"> 我知道了 </v-btn>
+        </div>
+      </div>
+    </v-dialog>
     <!-- <v-btn elevation="3" raised x-large @click="loggedOut">登出</v-btn> -->
   </div>
 </template>
@@ -92,6 +138,7 @@ export default class Login extends Vue {
   btnText = "";
   startLoading = false;
   tipsText = "Let me help you!";
+  dialog = false;
 
   @Ref() readonly typewriter!: any;
 
@@ -120,6 +167,9 @@ export default class Login extends Vue {
         to: `hallo${val.payload.name}， 请坐稳，准备起飞`,
       });
       this.tipsText = `hallo${val.payload.name}， 请坐稳，准备起飞`;
+      setTimeout(() => {
+        this.dialog = true;
+      }, 2000);
     }
   }
 
@@ -137,7 +187,7 @@ export default class Login extends Vue {
   }
 
   loggedOut() {
-    this.$store.commit("SET_LOGINQRCODE", "");
+    this.$store.commit("user/SET_LOGINQRCODE", "");
     wxBot.logout();
     wxBot.stop();
   }
@@ -147,11 +197,11 @@ export default class Login extends Vue {
   }
 
   get loginQrcodeImg() {
-    return this.$store.state.loginQrcode;
+    return this.$store.state.user.loginQrcode;
   }
 
   get userInfo() {
-    return this.$store.state.userInfo;
+    return this.$store.state.user.userInfo;
   }
 }
 </script>
@@ -218,9 +268,9 @@ export default class Login extends Vue {
 }
 
 .contents {
-  min-height: 350px;
+  min-height: 250px;
   max-width: 720px;
-  margin: -80px auto;
+  margin: -80px auto 0;
   position: relative;
   z-index: 1;
   background: #fff;
@@ -235,5 +285,38 @@ export default class Login extends Vue {
 }
 .qrcode {
   width: 300px;
+}
+
+::v-deep(.v-dialog) {
+  box-shadow: none;
+}
+
+.dialog-content {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  border-radius: 6px;
+  flex-direction: column;
+  background: #fff;
+}
+.dialog-title {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(58, 53, 65, 0.87);
+  margin-bottom: 20px;
+}
+.dialog-desc {
+  font-size: 14px;
+  font-weight: 400;
+
+  color: rgba(58, 53, 65, 0.87);
+}
+.dialog-footer {
+  margin-top: 20px;
+  text-align: right;
+  ::v-deep(.v-btn__content) {
+    color: rgb(145, 85, 253);
+  }
 }
 </style>

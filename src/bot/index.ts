@@ -1,5 +1,4 @@
 import { WechatyBuilder } from "wechaty";
-// import QRCode from "qrcode";
 import store from "@/store";
 
 const wxBot = WechatyBuilder.build({
@@ -17,11 +16,11 @@ async function wxBotInit() {
         qrcode
       )}`;
       console.log("qrcodeurl", url);
-      store.commit("SET_LOGINQRCODE", url);
+      store.commit("user/SET_LOGINQRCODE", url);
     })
     .on("login", async (user) => {
       console.log(`User ${user} logged in`);
-      store.commit("SET_LOGGED_IN", user);
+      store.commit("user/SET_LOGGED_IN", user);
     })
     .on("message", async (message) => {
       if (message.text().startsWith("/ping")) {
@@ -30,7 +29,7 @@ async function wxBotInit() {
       }
       try {
         console.log(`Message: ${message}`);
-        store.commit("SET_MESSAGELIST", message);
+        store.commit("user/SET_MESSAGELIST", message);
       } catch (e) {
         console.error(e);
       }
