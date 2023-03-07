@@ -1,5 +1,9 @@
 <template>
   <div class="slider-bar">
+    <div class="slider-title pa-2 white--text text-h5">
+      WxBotClient
+    </div>
+    <div class="menu-line ml-2 mt-2 mr-3 mb-0">基础 设置</div>
     <div class="menu">
       <div
         :class="['menu-item', { active: $route.path === item.path }]"
@@ -53,6 +57,19 @@ export default class Sliderbar extends Vue {
   min-height: 100vh;
   background: #28243d;
 
+  .menu-line {
+    font-size: 12px;
+    color: rgb(231,227,252);
+
+    &::before {
+      content: '—— ';
+    }
+
+    &::after {
+      content: ' ————';
+    }
+  }
+
   .menu {
     padding-top: 20px;
   }
@@ -61,6 +78,10 @@ export default class Sliderbar extends Vue {
     padding: 8px 0 8px 22px;
     margin: 0 12px 6px 0;
     border-radius: 0 25px 25px 0;
+
+    &:hover {
+      background: rgb(47, 43, 68);
+    }
   }
 
   .menu-item__content {
@@ -75,25 +96,37 @@ export default class Sliderbar extends Vue {
       rgb(145, 85, 235) 22.16%,
       rgba(145, 85, 235, 0.7) 76.47%
     ) !important;
+
+    .quan {
+      border: 2px solid rgba($color: #fff, $alpha: 1);
+    }
+    
+    .icon-right {
+      color: #fff;
+    }
+
+    .menu-title {
+      color: #fff;
+    }
   }
 
   .quan {
     width: 12px;
     height: 12px;
-    border: 2px solid #fff;
+    border: 2px solid rgba($color: #fff, $alpha: 0.6);
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 16px;
     transform: translateY(1px);
   }
   .icon-right {
     flex: 1;
     text-align: right;
-    color: #fff;
+    color: rgba($color: #fff, $alpha: 0.6);
   }
   .menu-title {
     font-size: 16px;
     line-height: 16px;
-    color: #fff;
+    color: rgba($color: #fff, $alpha: 0.6);
   }
 }
 </style>

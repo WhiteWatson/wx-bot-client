@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app width="230">
+    <v-navigation-drawer v-model="drawer" app width="250">
       <Sliderbar></Sliderbar>
     </v-navigation-drawer>
 
@@ -28,9 +28,4 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="scss" scoped>
-// .app-wrapper {
-//   height: 100vh;
-//   overflow: hidden;
-//   display: flex;
-// }
 </style>

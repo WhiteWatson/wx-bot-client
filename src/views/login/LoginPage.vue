@@ -2,11 +2,12 @@
   <div class="login">
     <header class="header">
       <div class="header-content">
-        <div v-if="userInfo" class="name">{{ userInfo.payload.name }}</div>
+        <div v-if="userInfo" class="name"></div>
         <div class="logout">
           <v-btn
             v-if="userInfo"
-            class="ma-2"
+            class="mt-3"
+            text
             transition="fade-transition"
             color="white"
             @click="loggedOut"
@@ -76,36 +77,15 @@
         <div></div>
       </transition>
     </div>
-    <v-footer dark padless>
-      <v-card flat tile class="indigo lighten-1 white--text text-center">
-        <v-card-text>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-4 white--text"
-            icon
-          >
-            <v-icon size="24px">
-              {{ icon }}
-            </v-icon>
-          </v-btn>
+    <v-footer dark padless absolute>
+      <v-card class="flex login-footer" color="#712cf9" flat tile>
+        <v-card-text class="pb-0">
+          <div class="subheading subtitle-1 text-center">
+            此软件仅供学习使用，律师函警告 0.0
+          </div>
         </v-card-text>
-
-        <v-card-text class="white--text pt-0">
-          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
-          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
-          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
-          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
-          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
-          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
-          parturient montes, nascetur ridiculus mus.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        <v-card-text class="py-2 white--text text-center">
+          {{ new Date().getFullYear() }} — <strong>WxBotClient</strong>
         </v-card-text>
       </v-card>
     </v-footer>
@@ -169,7 +149,7 @@ export default class Login extends Vue {
       this.tipsText = `hallo${val.payload.name}， 请坐稳，准备起飞`;
       setTimeout(() => {
         this.dialog = true;
-      }, 2000);
+      }, 3000);
     }
   }
 
@@ -206,6 +186,9 @@ export default class Login extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.login {
+  min-height: 100vh;
+}
 .header {
   max-height: 60px;
   position: fixed;
@@ -318,5 +301,8 @@ export default class Login extends Vue {
   ::v-deep(.v-btn__content) {
     color: rgb(145, 85, 253);
   }
+}
+.login-footer {
+  width: 100%;
 }
 </style>
