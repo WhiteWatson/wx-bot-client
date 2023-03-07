@@ -123,14 +123,16 @@ export default {
       assert(changed, "Changed parameter is needed");
       const { from, to } = changed;
       const str = this.$el.innerHTML;
-      const regex = new RegExp("\\b" + from + "\\b");
-      const match = str.match(regex);
-      assert(
-        match,
-        `Substring '${from}' not found in component\` current innerHTML`
-      );
-      const { index } = match;
-      // const { index } = str.indexOf(from) - from.length;
+      // const regex = new RegExp("\\" + from + "\\");
+      // const regex = new RegExp(`\\b${from}\\b`);
+      // console.log("regex", regex);
+      // const match = str.match(regex);
+      // assert(
+      //   match,
+      //   `Substring '${from}' not found in component\` current innerHTML`
+      // );
+      // const { index } = match;
+      const index = str.indexOf(from);
       await this.removeString(index, index + from.length);
       await this.addString(index, to);
     },
