@@ -11,7 +11,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
-  "main": "background",
+  "main": "background.js",
   "dependencies": {
     "@mdi/font": "^7.1.96",
     "@types/node": "^18.14.2",
@@ -29,7 +29,7 @@
     "vuetify": "^2.6.0",
     "vuex": "^3.6.2",
     "vuex-module-decorators": "^2.0.0",
-    "watchdog": "0.9.2",
+    "webpack-shebang-plugin": "^1.1.8",
     "wechaty": "^1.20.2",
     "wechaty-puppet-wechat": "^1.18.4"
   },
@@ -45,7 +45,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
-    "electron": "13.0.0",
+    "electron": "13.3.0",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -60,5 +60,14 @@
     "vue-cli-plugin-vuetify": "~2.5.8",
     "vue-template-compiler": "^2.6.14",
     "vuetify-loader": "^1.7.0"
+  },
+  "resolutions": {
+    "watchdog": "0.9.2",
+    "rx-queue": "file:./self_modules/rx-queue"
+  },
+  "overrides": {
+    "wechaty": {
+      "rx-queue": "file:./rx-queue"
+    }
   }
 }

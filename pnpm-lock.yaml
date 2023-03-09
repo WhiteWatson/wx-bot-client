@@ -1,5 +1,9 @@
 lockfileVersion: 5.4
 
+overrides:
+  watchdog: 0.9.2
+  rx-queue: file:./rx-queue
+
 specifiers:
   '@mdi/font': ^7.1.96
   '@types/electron-devtools-installer': ^2.2.0
@@ -16,7 +20,7 @@ specifiers:
   '@vue/eslint-config-typescript': ^9.1.0
   animate.css: ^4.1.1
   chatgpt: ^5.0.8
-  electron: 13.0.0
+  electron: 13.3.0
   electron-devtools-installer: ^3.1.0
   eslint: ^7.32.0
   eslint-config-prettier: ^8.3.0
@@ -43,7 +47,7 @@ specifiers:
   vuetify-loader: ^1.7.0
   vuex: ^3.6.2
   vuex-module-decorators: ^2.0.0
-  watchdog: 0.9.2
+  webpack-shebang-plugin: ^1.1.8
   wechaty: ^1.20.2
   wechaty-puppet-wechat: ^1.18.4
 
@@ -64,7 +68,7 @@ dependencies:
   vuetify: registry.npmmirror.com/vuetify/2.6.14_vue@2.7.14
   vuex: registry.npmmirror.com/vuex/3.6.2_vue@2.7.14
   vuex-module-decorators: registry.npmmirror.com/vuex-module-decorators/2.0.0_vue@2.7.14+vuex@3.6.2
-  watchdog: registry.npmmirror.com/watchdog/0.9.2
+  webpack-shebang-plugin: registry.npmmirror.com/webpack-shebang-plugin/1.1.8
   wechaty: registry.npmmirror.com/wechaty/1.20.2
   wechaty-puppet-wechat: registry.npmmirror.com/wechaty-puppet-wechat/1.18.4
 
@@ -80,7 +84,7 @@ devDependencies:
   '@vue/cli-service': registry.npmmirror.com/@vue/cli-service/5.0.8_cmb4ksbf3fdb23ge3xg4xdbkwq
   '@vue/eslint-config-prettier': registry.npmmirror.com/@vue/eslint-config-prettier/6.0.0_qvtegtj2dfhkhm4jo764lsfbri
   '@vue/eslint-config-typescript': registry.npmmirror.com/@vue/eslint-config-typescript/9.1.0_dgbd642l72cdr6vlabfe4lkmme
-  electron: registry.npmmirror.com/electron/13.0.0
+  electron: registry.npmmirror.com/electron/13.3.0
   electron-devtools-installer: registry.npmmirror.com/electron-devtools-installer/3.2.0
   eslint: registry.npmmirror.com/eslint/7.32.0
   eslint-config-prettier: registry.npmmirror.com/eslint-config-prettier/8.6.0_eslint@7.32.0
@@ -97,6 +101,16 @@ devDependencies:
   vuetify-loader: registry.npmmirror.com/vuetify-loader/1.9.2_vue@2.7.14+vuetify@2.6.14
 
 packages:
+
+  file:rx-queue:
+    resolution: {directory: rx-queue, type: directory}
+    name: rx-queue
+    version: 1.0.5
+    engines: {node: '>=16', npm: '>=7'}
+    dependencies:
+      ix: registry.npmmirror.com/ix/4.6.1
+      rxjs: registry.npmmirror.com/rxjs/7.8.0
+    dev: false
 
   registry.npmmirror.com/7zip-bin/5.1.1:
     resolution: {integrity: sha512-sAP4LldeWNz0lNzmTird3uWfFDWWTeg6V/MsmyyLR9X1idwKBWIgt/ZvinqQldJm3LecKEs1emkbquO6PCiLVQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/7zip-bin/-/7zip-bin-5.1.1.tgz}
@@ -5769,10 +5783,10 @@ packages:
     version: 1.4.317
     dev: true
 
-  registry.npmmirror.com/electron/13.0.0:
-    resolution: {integrity: sha512-5SgpU7BgR4DJM1TPuZmKQ89A0AMN9vq7J7OfJebbHjsAuYP+rmJwosVna/RpLYFBuQNM90gnny5sffYGDZFQ4w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/electron/-/electron-13.0.0.tgz}
+  registry.npmmirror.com/electron/13.3.0:
+    resolution: {integrity: sha512-d/BvOLDjI4i7yf9tqCuLL2fFGA2TrM/D9PyRpua+rJolG0qrwp/FohP02L0m+44kmPpofIo4l3NPwLmzyKKimA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/electron/-/electron-13.3.0.tgz}
     name: electron
-    version: 13.0.0
+    version: 13.3.0
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
@@ -12053,16 +12067,6 @@ packages:
       aproba: registry.npmmirror.com/aproba/1.2.0
     dev: true
 
-  registry.npmmirror.com/rx-queue/1.0.5:
-    resolution: {integrity: sha512-upDUgE3pk1+JnyV9MBkVSSlpSIg33ygqXvczsQIMVyjubLWCX/QzoFNfQavEHxYxKw+9JNMqDTPnxZ3dnR+61g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rx-queue/-/rx-queue-1.0.5.tgz}
-    name: rx-queue
-    version: 1.0.5
-    engines: {node: '>=16', npm: '>=7'}
-    dependencies:
-      ix: registry.npmmirror.com/ix/4.6.1
-      rxjs: registry.npmmirror.com/rxjs/7.8.0
-    dev: false
-
   registry.npmmirror.com/rxjs/7.8.0:
     resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rxjs/-/rxjs-7.8.0.tgz}
     name: rxjs
@@ -14382,14 +14386,6 @@ packages:
       vue: registry.npmmirror.com/vue/2.7.14
     dev: false
 
-  registry.npmmirror.com/watchdog/0.8.17:
-    resolution: {integrity: sha512-RHxxLKqtggCGapGIng8OBOzebF9rx2ucl4bT36mj7GkipcIzj4Rhg0nlcP0RpMHtC8Gys4a5F9/DXz/qYIa0WQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/watchdog/-/watchdog-0.8.17.tgz}
-    name: watchdog
-    version: 0.8.17
-    dependencies:
-      brolog: registry.npmmirror.com/brolog/1.14.2
-    dev: false
-
   registry.npmmirror.com/watchdog/0.9.2:
     resolution: {integrity: sha512-bJ5u3KYaTXFhfT83CemH5l3DCmvXSjYHFOv2cE9SS1oRRlMLTFcOUNMVsAXNvAHWkRCnv/iTGs0JIVmJAN99Bg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/watchdog/-/watchdog-0.9.2.tgz}
     name: watchdog
@@ -14573,6 +14569,12 @@ packages:
       clone-deep: registry.npmmirror.com/clone-deep/4.0.1
       wildcard: registry.npmmirror.com/wildcard/2.0.0
     dev: true
+
+  registry.npmmirror.com/webpack-shebang-plugin/1.1.8:
+    resolution: {integrity: sha512-8iHYp37XjytLuTkw8GCb4wm0s/0IWcv03YsfaDbOeRJfzSuBYVOadvc/QXQvr2b55pOEX1ANAEbz1fFSydJWVA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/webpack-shebang-plugin/-/webpack-shebang-plugin-1.1.8.tgz}
+    name: webpack-shebang-plugin
+    version: 1.1.8
+    dev: false
 
   registry.npmmirror.com/webpack-sources/1.4.3:
     resolution: {integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/webpack-sources/-/webpack-sources-1.4.3.tgz}
@@ -14770,10 +14772,10 @@ packages:
       puppeteer-extra-plugin-stealth: registry.npmmirror.com/puppeteer-extra-plugin-stealth/2.11.2_puppeteer-extra@3.3.6
       qr-image: registry.npmmirror.com/qr-image/3.2.0
       request: registry.npmmirror.com/request/2.88.2
-      rx-queue: registry.npmmirror.com/rx-queue/1.0.5
+      rx-queue: file:rx-queue
       rxjs: registry.npmmirror.com/rxjs/7.8.0
       state-switch: registry.npmmirror.com/state-switch/1.6.3_rxjs@7.8.0
-      watchdog: registry.npmmirror.com/watchdog/0.8.17
+      watchdog: registry.npmmirror.com/watchdog/0.9.2
       xml2js: registry.npmmirror.com/xml2js/0.4.23
     transitivePeerDependencies:
       - '@types/puppeteer'
@@ -14888,7 +14890,7 @@ packages:
       json-rpc-peer: registry.npmmirror.com/json-rpc-peer/0.17.0
       memory-card: registry.npmmirror.com/memory-card/1.1.2
       open-graph: registry.npmmirror.com/open-graph/0.2.6
-      rx-queue: registry.npmmirror.com/rx-queue/1.0.5
+      rx-queue: file:rx-queue
       state-switch: registry.npmmirror.com/state-switch/1.6.3_gerror@1.0.16
       uuid: registry.npmmirror.com/uuid/8.3.2
       wechaty-puppet: registry.npmmirror.com/wechaty-puppet/1.20.2
@@ -15128,6 +15130,7 @@ packages:
     name: xmlbuilder
     version: 15.1.1
     engines: {node: '>=8.0'}
+    requiresBuild: true
     dev: true
 
   registry.npmmirror.com/xstate/4.37.0:
