@@ -9,6 +9,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
+console.log("enter main.ts");
 
 new Vue({
   router,

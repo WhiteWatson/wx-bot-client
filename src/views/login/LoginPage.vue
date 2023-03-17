@@ -98,7 +98,7 @@
           key，为了防止你的管家失联，请勿关闭此程序。
         </div>
         <div class="dialog-footer">
-          <v-btn text @click="$router.push('/')"> 我知道了 </v-btn>
+          <v-btn text @click="$router.push('/home')"> 我知道了 </v-btn>
         </div>
       </div>
     </v-dialog>
@@ -173,7 +173,7 @@ export default class Login extends Vue {
   }
 
   beforeMount() {
-    // console.log(this.$store.state.loginQrcode);
+    console.log("loginpage beforMount");
   }
 
   get loginQrcodeImg() {

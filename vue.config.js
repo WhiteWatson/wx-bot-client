@@ -7,6 +7,16 @@ module.exports = defineConfig({
   pluginOptions: {
     electronBuilder: {
       nodeIntegration: true,
+      builderOptions: {
+        nsis: {
+          allowToChangeInstallationDirectory: true,
+          oneClick: false,
+        },
+        productName: "WxBotClient",
+        mac: {
+          target: ["dmg", "zip"],
+        },
+      },
     },
   },
   configureWebpack: {

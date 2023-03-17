@@ -19,6 +19,10 @@ export default class Home extends Vue {
     const question: any = await sendMessage("hello");
     console.log("question:", question[0].message.content);
   }
+
+  beforeMount() {
+    console.log("homepage beforMount");
+  }
 }
 </script>
 <style lang="scss" scoped></style>

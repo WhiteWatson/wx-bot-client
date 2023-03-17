@@ -7,10 +7,11 @@ import LoginPage from "../views/login/LoginPage.vue";
 import GptSetting from "@/views/gptsetting/GptSetting.vue";
 
 Vue.use(VueRouter);
+console.log("enter router");
 
 export const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/home",
     name: "控制台",
     component: Layout,
     redirect: "/home",
@@ -25,27 +26,22 @@ export const routes: Array<RouteConfig> = [
         component: GptSetting,
         name: "GPT设置",
       },
-      {
-        path: "/setting",
-        // component: HomeView,
-        name: "设置",
-      },
+      // {
+      //   path: "/setting",
+      //   component: HomeView,
+      //   name: "设置",
+      // },
     ],
   },
   {
-    path: "/login",
+    path: "/",
     name: "login",
     component: LoginPage,
   },
 ];
 
-export const routerMap = [
-  { path: "/", component: Layout, name: "首页", isHidden: true },
-  { path: "/login", component: LoginPage, name: "登录", isHidden: true },
-];
-
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes,
 });

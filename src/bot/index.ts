@@ -6,7 +6,7 @@ import { ContactSelfInterface } from "wechaty/impls";
 let botName: string | ContactSelfInterface | undefined;
 
 const wxBot = WechatyBuilder.build({
-  name: "wx-bot", // generate xxxx.memory-card.json and save login data for the next login
+  name: "wx-bot",
   puppetOptions: {
     uos: true, // 开启uos协议
   },
@@ -36,6 +36,7 @@ async function wxBotInit() {
       }
       try {
         if (message.from()?.payload?.name !== botName) {
+          message.say("AI正在思考，请稍后...");
           sendMessage(message.text()).then((res: any) => {
             message.say(res[0].message.content);
           });

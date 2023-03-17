@@ -57,3 +57,36 @@ https://bobbyhadz.com/blog/node-openssl-legacy-provider-is-not-allowed-in-node-o
 
 ## this.timer.unref
 watchdog版本问题，需要手动升级到0.9.2，同时注意把老版本删除
+
+## 打包后Package subpath './v4' is not defined by "exports" in xxx
+https://github.com/uuidjs/uuid/issues/607
+
+A solution was to change the uuid module package.json export attribute in node_modules from
+
+```
+".": {
+      "node": {
+        "module": "./dist/esm-node/index.js",
+        "require": "./dist/index.js",
+        "import": "./wrapper.mjs"
+      },
+      "default": "./dist/esm-browser/index.js"
+},
+"./package.json": "./package.json"
+```
+to
+
+```
+".": {
+      "node": {
+        "module": "./dist/esm-node/index.js",
+        "require": "./dist/index.js",
+        "import": "./wrapper.mjs"
+      },
+      "default": "./dist/esm-browser/index.js"
+},
+"./": "./dist/",
+"./package.json": "./package.json"
+```
+
+## 打包后state_switch_1.BooleanIndicator is not a constructor
