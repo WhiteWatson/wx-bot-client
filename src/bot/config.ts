@@ -1,6 +1,6 @@
 export const chatGptConfig = {
   Organization: "org-0hRfyqNrF5pLgxKS85EGaKmG",
-  APIKey: "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",
+  APIKey: "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",
 };
 
 export const appPuppetList = {
@@ -11,3 +11,14 @@ export const appPuppetList = {
     puppet: "wechaty-plugin-wecom",
   },
 };
+
+export const firstName = [
+  "#AI",
+  "#ai",
+  "#Ai",
+  "#aI",
+  "/AI",
+  "/ai",
+  "/Ai",
+  "/aI",
+];

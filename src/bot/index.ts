@@ -2,6 +2,7 @@ import { WechatyBuilder } from "wechaty";
 import store from "@/store";
 import { sendMessage } from "./chatgpt/main";
 import { ContactSelfInterface } from "wechaty/impls";
+import { firstName } from "./config";
 
 let botName: string | ContactSelfInterface | undefined;
 
@@ -35,13 +36,15 @@ async function wxBotInit() {
         return;
       }
       try {
-        if (message.from()?.payload?.name !== botName) {
-          message.say("AI正在思考，请稍后...");
-          sendMessage(message.text()).then((res: any) => {
-            message.say(res[0].message.content);
-          });
+        if (firstName.includes(message.text().substring(0, 3))) {
+          if (message.from()?.payload?.name !== botName) {
+            message.say("AI正在思考，请稍后...");
+            sendMessage(message.text().substring(3)).then((res: any) => {
+              message.say(`@${message.from()?.payload?.name} ${res[0].message.content}`);
+            });
+          }
+          store.commit("user/SET_MESSAGELIST", message);
         }
-        store.commit("user/SET_MESSAGELIST", message);
       } catch (e) {
         console.error(e);
       }
