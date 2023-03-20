@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
 import { chatGptConfig } from "../config";
 
 const MAX_QBS = 3;
@@ -11,14 +11,14 @@ const configuration = new Configuration({
 });
 export const openai = new OpenAIApi(configuration);
 
-export const sendMessage = (message: string) => {
+export const sendMessage = (message: ChatCompletionRequestMessage[]) => {
   return new Promise((resolve, rejects) => {
     if (qbs <= MAX_QBS) {
       qbs++;
       openai
         .createChatCompletion({
           model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: message }],
+          messages: message,
         })
         .then((res) => {
           qbs--;

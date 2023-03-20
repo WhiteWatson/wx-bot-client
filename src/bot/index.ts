@@ -3,8 +3,9 @@ import store from "@/store";
 import { sendMessage } from "./chatgpt/main";
 import { ContactSelfInterface } from "wechaty/impls";
 import { firstName } from "./config";
+import { onMessage } from "./onMessage";
 
-let botName: string | ContactSelfInterface | undefined;
+export let botName: string | ContactSelfInterface | undefined;
 
 const wxBot = WechatyBuilder.build({
   name: "wx-bot",
@@ -30,30 +31,12 @@ async function wxBotInit() {
 
       store.commit("user/SET_LOGGED_IN", user);
     })
-    .on("message", async (message) => {
-      if (message.text().startsWith("/ping")) {
-        await message.say("pong");
-        return;
-      }
-      try {
-        if (firstName.includes(message.text().substring(0, 3))) {
-          if (message.from()?.payload?.name !== botName) {
-            message.say("AI正在思考，请稍后...");
-            sendMessage(message.text().substring(3)).then((res: any) => {
-              message.say(`@${message.from()?.payload?.name} ${res[0].message.content}`);
-            });
-          }
-          store.commit("user/SET_MESSAGELIST", message);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    });
+    .on("message", onMessage);
   try {
     await wxBot.start();
   } catch (e) {
     console.error(
-      `⚠️ Bot start failed, can you log in through wechat on the web?: ${e}`
+      ` ${e}`
     );
   }
 }

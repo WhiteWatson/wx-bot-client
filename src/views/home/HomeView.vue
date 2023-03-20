@@ -16,8 +16,6 @@ export default class Home extends Vue {
     console.log("openai:", openai);
     // let listmodels = await openai.listModels();
     // console.log("listModels:", listmodels);
-    const question: any = await sendMessage("hello");
-    console.log("question:", question[0].message.content);
   }
 
   beforeMount() {
