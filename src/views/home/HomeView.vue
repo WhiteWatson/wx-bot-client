@@ -19,7 +19,7 @@ export default class Home extends Vue {
   }
 
   beforeMount() {
-    console.log("homepage beforMount");
+    // console.log("homepage beforMount");
   }
 }
 </script>

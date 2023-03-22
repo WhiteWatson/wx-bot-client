@@ -173,7 +173,7 @@ export default class Login extends Vue {
   }
 
   beforeMount() {
-    console.log("loginpage beforMount");
+    // console.log("loginpage beforMount");
   }
 
   get loginQrcodeImg() {

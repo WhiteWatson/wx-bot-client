@@ -7,7 +7,6 @@ import LoginPage from "../views/login/LoginPage.vue";
 import GptSetting from "@/views/gptsetting/GptSetting.vue";
 
 Vue.use(VueRouter);
-console.log("enter router");
 
 export const routes: Array<RouteConfig> = [
   {
