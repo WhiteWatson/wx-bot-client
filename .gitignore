@@ -2,6 +2,7 @@
 node_modules
 /dist
 /dist_electron
+wx-bot.memory-card.json
 
 
 # local env files
