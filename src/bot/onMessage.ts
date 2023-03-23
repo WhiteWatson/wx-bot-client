@@ -2,7 +2,7 @@ import { MessageInterface, RoomInterface } from "wechaty/impls";
 import { botName } from ".";
 import { firstName, jiaweisi } from "./config";
 import { sendMessage } from "./chatgpt/main";
-import EStore from 'electron-store'
+// import EStore from "electron-store";
 import { ChatCompletionRequestMessage } from "openai";
 
 const history: any = [];
@@ -11,7 +11,7 @@ const roomList = new Map();
 export const onMessage = async (message: MessageInterface) => {
   if (message.room()) {
     // 消息来自群聊
-    roomMessage(message)
+    roomMessage(message);
     return;
   }
   // 非群聊
@@ -22,14 +22,10 @@ export const onMessage = async (message: MessageInterface) => {
   if (message.text().startsWith("/clear memory")) {
     if (roomList.get(message.from()?.id)) {
       roomList.delete(message.from()?.id);
-      message.say(
-        `@${message.from()?.payload?.name} 此回话记忆已清除...`
-      );
+      message.say(`@${message.from()?.payload?.name} 此回话记忆已清除...`);
       return;
     }
-    message.say(
-      `@${message.from()?.payload?.name} 并无记忆存储...`
-    );
+    message.say(`@${message.from()?.payload?.name} 并无记忆存储...`);
     return;
   }
   if (message.text().startsWith("/贾维斯")) {
@@ -42,32 +38,26 @@ export const onMessage = async (message: MessageInterface) => {
     messages.push({ role: "user", content: user_input });
     sendMessage(messages).then((res: any) => {
       const completion_text = res[0].message.content;
-      message.say(
-        `@${message.from()?.payload?.name} 贾维斯已就绪...`
-      );
+      message.say(`@${message.from()?.payload?.name} 贾维斯已就绪...`);
       history.push([user_input, completion_text]);
     });
     return;
   }
   if (roomList.get(message.from()?.id)) {
-    startAI(message, roomList.get(message.from()?.id))
+    startAI(message, roomList.get(message.from()?.id));
     return;
   }
-  startAI(message, [])
+  startAI(message, []);
 };
 
 const roomMessage = (message: MessageInterface) => {
   if (message.text().startsWith("/clear memory")) {
     if (roomList.get(message.room()?.id)) {
       roomList.delete(message.room()?.id);
-      message.say(
-        `@${message.from()?.payload?.name} 本群记忆已清除...`
-      );
+      message.say(`@${message.from()?.payload?.name} 本群记忆已清除...`);
       return;
     }
-    message.say(
-      `@${message.from()?.payload?.name} 本群并无记忆...`
-    );
+    message.say(`@${message.from()?.payload?.name} 本群并无记忆...`);
     return;
   }
   if (roomList.get(message.room()?.id)) {
@@ -75,10 +65,10 @@ const roomMessage = (message: MessageInterface) => {
     startAI(message, roomList.get(message.room()?.id));
     return;
   }
-  startAI(message, [])
-}
+  startAI(message, []);
+};
 
-const startAI = (message: MessageInterface, history:any) => {
+const startAI = (message: MessageInterface, history: any) => {
   if (firstName.includes(message.text().substring(0, 3))) {
     if (message.from()?.payload?.name !== botName) {
       message.say("AI正在思考，请稍后...");
@@ -91,12 +81,10 @@ const startAI = (message: MessageInterface, history:any) => {
       messages.push({ role: "user", content: user_input });
       sendMessage(messages).then((res: any) => {
         const completion_text = res[0].message.content;
-        message.say(
-          `@${message.from()?.payload?.name} ${completion_text}`
-        );
+        message.say(`@${message.from()?.payload?.name} ${completion_text}`);
         history.push([user_input, completion_text]);
-        roomList.set(message.room()?.id || message.from()?.id, history)
+        roomList.set(message.room()?.id || message.from()?.id, history);
       });
     }
   }
-}
+};

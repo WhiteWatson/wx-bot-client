@@ -6,7 +6,7 @@ const MAX_QBS = 3;
 let qbs = 0;
 
 const configuration = new Configuration({
-  organization: "org-0hRfyqNrF5pLgxKS85EGaKmG",
+  organization: chatGptConfig.Organization,
   apiKey: chatGptConfig.APIKey,
 });
 export const openai = new OpenAIApi(configuration);
