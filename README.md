@@ -1,5 +1,5 @@
 # Hi there, I'm WxBotClient <img width="30px" src="https://media.tenor.com/images/3b388fe03da271d2674faf85eb7c3fcd/tenor.gif" />
-我是一款开源的微信托管软件，基于electron和vue开发，现已接入ChatGPT，编译出的安装包开箱即用，不依赖复杂环境，托管程序不随意掉线，稳定可靠。
+我是一款开源的微信托管软件，基于electron、wechaty和vue开发，现已接入ChatGPT，编译出的安装包开箱即用，不依赖复杂环境，托管程序不随意掉线，稳定可靠。
 
 <img align="right" alt="GIF" height="160px" src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" />
 
@@ -12,14 +12,23 @@
 - ⚡ Fun fact: I love to play Genshin Impact.
 
 ## Quick Start
+此项目本地运行依赖node环境
+
+### 安装依赖
 ```
 pnpm install
 ```
+
+### 接入ChatGPT并本地运行项目：
+
+进入`/src/bot/config.ts`目录，将从[openAi官网API申请入口](https://platform.openai.com/account/api-keys)申请到`Organization`和`APIKey`的填写到`chatGptConfig`对象中
+
 
 ```
 npm run electron:serve
 ```
 
+### 打包客户端安装包:
 ```
 npm run electron:build
 ```

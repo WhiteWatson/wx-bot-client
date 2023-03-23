@@ -16,6 +16,7 @@
     "@mdi/font": "^7.1.96",
     "@types/node": "^18.14.2",
     "animate.css": "^4.1.1",
+    "electron-store": "^8.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "openai": "^3.2.1",
     "qrcode": "^1.5.1",
