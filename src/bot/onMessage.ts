@@ -1,9 +1,9 @@
-import { MessageInterface, RoomInterface } from "wechaty/impls";
+import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
 import { firstName, jiaweisi } from "./config";
 import { sendMessage } from "./chatgpt/main";
-// import EStore from "electron-store";
 import { ChatCompletionRequestMessage } from "openai";
+import { getImageByStableDiffusion } from "./replicate/request";
 
 const history: any = [];
 const roomList = new Map();
@@ -68,7 +68,7 @@ const roomMessage = (message: MessageInterface) => {
   startAI(message, []);
 };
 
-const startAI = (message: MessageInterface, history: any) => {
+const startAI = async (message: MessageInterface, history: any) => {
   if (firstName.includes(message.text().substring(0, 3))) {
     if (message.from()?.payload?.name !== botName) {
       message.say("AI正在思考，请稍后...");
@@ -86,5 +86,11 @@ const startAI = (message: MessageInterface, history: any) => {
         roomList.set(message.room()?.id || message.from()?.id, history);
       });
     }
+  }
+  if (message.text().startsWith("/image")) {
+    const image = await getImageByStableDiffusion(
+      message.text().replace("/image", "")
+    );
+    console.log("生成图像", image);
   }
 };
