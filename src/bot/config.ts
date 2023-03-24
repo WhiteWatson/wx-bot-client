@@ -1,6 +1,6 @@
 export const chatGptConfig = {
   Organization: "org-0hRfyqNrF5pLgxKS85EGaKmG",
-  APIKey: "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",
+  APIKey: "************",
 };
 
 export const appPuppetList = {
