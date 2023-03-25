@@ -89,4 +89,9 @@ to
 "./package.json": "./package.json"
 ```
 
+## 编译打包时出现qrcode相关报错
+进入file-box包删除qrcode相关引用
+![markdown picture](./images/qrcode-err.jpg)
+
+
 ## 打包后state_switch_1.BooleanIndicator is not a constructor
