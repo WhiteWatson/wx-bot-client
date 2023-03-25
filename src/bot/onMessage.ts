@@ -1,9 +1,10 @@
 import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
+import { FileBox }  from 'file-box'
 import { firstName, jiaweisi } from "./config";
 import { sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
-import { getImageByStableDiffusion } from "./replicate/request";
+import { getImageByStableDiffusion, loadReplicateImage } from "./replicate/request";
 
 const history: any = [];
 const roomList = new Map();
@@ -88,9 +89,67 @@ const startAI = async (message: MessageInterface, history: any) => {
     }
   }
   if (message.text().startsWith("/image")) {
-    const image = await getImageByStableDiffusion(
-      message.text().replace("/image", "")
-    );
-    console.log("生成图像", image);
+    message.say(`@${message.from()?.payload?.name} 提示词请用英语描述！！！\n生成的图片地址请复制浏览器打开\n生成图像时间较长，请稍后...`);
+    const texts = message.text().replace("/image", "")
+    console.log('propty', texts);
+    getImageByStableDiffusion(texts).then(async (res: any) => {
+      console.log("prediction", res);
+      const withImage = await withImageLoad(message, res.data)
+      console.log('withImage', withImage);
+      
+      // loadReplicateImage(res.data).then(image => {
+      //   console.log("生成图像", image);
+      //   message.say(`@${message.from()?.payload?.name} ${image}`);
+      // })
+      // setTimeout(() => {
+      //   loadReplicateImage(res.data).then(image => {
+      //   console.log("生成图像2", image.data.prediction.output[0]);
+      //   message.say(`@${message.from()?.payload?.name} ${image}`);
+      //   })
+      // }, 10000);
+    })
   }
 };
+
+const withImageLoad = async (message: MessageInterface, prediction: any, time = 0) => {
+  if (time > 15) {
+    message.say(`@${message.from()?.payload?.name} 生成图片超时，请重试...`);
+    return
+  } 
+  setTimeout(async () => {
+    const res = await loadReplicateImage(prediction);
+    console.log('当前状态：', res.data?.prediction?.status);
+    if (res.data?.prediction?.status === 'failed') {
+      message.say(`@${message.from()?.payload?.name} 出现未知错误，请重试...`);
+      return;
+    }
+    if (res.data?.prediction?.status === 'succeeded') {
+      message.say(`@${message.from()?.payload?.name} ${res.data?.prediction?.output[0]}`);
+      // const imgBase64 = imageUrlToBase64(res.data?.prediction?.output[0])
+      // const fileBox = FileBox.fromUrl(imgBase64);
+      // console.log('fileBox', fileBox, imgBase64);
+      // message.say(fileBox);
+      return;
+    }
+    withImageLoad(message, prediction, time++);
+  }, 2000);
+}
+
+// const imageUrlToBase64 = (url: string) => {
+//   //一定要设置为let，不然图片不显示
+//   let image = new Image();
+//   //解决跨域问题
+//   image.setAttribute('crossOrigin', 'anonymous');
+//   image.src = url
+//   //image.onload为异步加载
+//   image.onload = () => { 
+//     var canvas = document.createElement("canvas");
+//     canvas.width = image.width;
+//     canvas.height = image.height;
+//     canvas.getContext('2d')?.drawImage(image, 0, 0, image.width, image.height);
+//     var quality = 0.8;
+//     //这里的dataurl就是base64类型
+//     return canvas.toDataURL("image/jpeg", quality);//使用toDataUrl将图片转换成jpeg的格式,不要把图片压缩成png，因为压缩成png后base64的字符串可能比不转换前的长！
+//   }
+//   return ''
+// }

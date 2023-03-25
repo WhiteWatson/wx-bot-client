@@ -52,11 +52,43 @@ export const getStableDiffusion = () => {
 };
 
 export const getImageByStableDiffusion = (text: string) => {
-  return new Promise((resolve: any, rejects: any) => {
-    service.post("https://replicate.com");
+  return new Promise((resolve: any, reject: any) => {
+    service.post(
+      "https://replicate.com/api/models/stability-ai/stable-diffusion/versions/db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf/predictions",
+      {
+        "inputs": {
+            "prompt": text
+        }
+      }
+    ).then(
+      (response) => {
+        resolve(response);
+      },
+      (err) => {
+        reject(err);
+      }
+    )
+    .catch((error) => {
+      reject(error);
+    });
   });
 };
 
-// getStableDiffusion().then((res) => {
-//   console.log(res.data);
-// });
+export const loadReplicateImage = async (prediction: any) => {
+  // return new Promise((resolve: any, reject: any) => {
+  //   service.get(`https://replicate.com/api/models${prediction.version.model.absolute_url}/versions/${prediction.version_id}/predictions/${prediction.uuid}`)
+  //   .then(
+  //     (response) => {
+  //       resolve(response);
+  //     },
+  //     (err) => {
+  //       reject(err);
+  //     }
+  //   )
+  //   .catch((error) => {
+  //     reject(error);
+  //   });
+  // });
+  return await service.get(`https://replicate.com/api/models${prediction.version?.model.absolute_url}/versions/${prediction.version_id}/predictions/${prediction.uuid}`)
+};
+

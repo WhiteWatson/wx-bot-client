@@ -8,7 +8,6 @@ specifiers:
   '@mdi/font': ^7.1.96
   '@types/electron-devtools-installer': ^2.2.0
   '@types/node': ^18.14.2
-  '@types/qrcode': ^1.5.0
   '@typescript-eslint/eslint-plugin': ^5.4.0
   '@typescript-eslint/parser': ^5.4.0
   '@vue/cli-plugin-eslint': ~5.0.0
@@ -31,7 +30,6 @@ specifiers:
   node-replicate: ^1.1.6
   openai: ^3.2.1
   prettier: ^2.4.1
-  qrcode: ^1.5.1
   qrcode-terminal: ^0.12.0
   sass: ^1.32.7
   sass-loader: ^12.0.0
@@ -62,7 +60,6 @@ dependencies:
   node-polyfill-webpack-plugin: registry.npmmirror.com/node-polyfill-webpack-plugin/2.0.1
   node-replicate: registry.npmmirror.com/node-replicate/1.1.6
   openai: registry.npmmirror.com/openai/3.2.1
-  qrcode: registry.npmmirror.com/qrcode/1.5.1
   qrcode-terminal: registry.npmmirror.com/qrcode-terminal/0.12.0
   ts-loader: registry.npmmirror.com/ts-loader/8.2.0_typescript@4.5.5
   vue: registry.npmmirror.com/vue/2.7.14
@@ -78,7 +75,6 @@ dependencies:
 
 devDependencies:
   '@types/electron-devtools-installer': registry.npmmirror.com/@types/electron-devtools-installer/2.2.2
-  '@types/qrcode': registry.npmmirror.com/@types/qrcode/1.5.0
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.54.0_igettdwauavefi4fuq7uyqvthe
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.54.0_sgaiclxgc5mltnpgmg7py4v6ca
   '@vue/cli-plugin-eslint': registry.npmmirror.com/@vue/cli-plugin-eslint/5.0.8_yvnkslq6l73c7sesu7e5hzum2a
@@ -1634,14 +1630,6 @@ packages:
       xmlbuilder: registry.npmmirror.com/xmlbuilder/15.1.1
     dev: true
     optional: true
-
-  registry.npmmirror.com/@types/qrcode/1.5.0:
-    resolution: {integrity: sha512-x5ilHXRxUPIMfjtM+1vf/GPTRWZ81nqscursm5gMznJeK9M0YnZ1c3bEvRLQ0zSSgedLx1J6MGL231ObQGGhaA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/qrcode/-/qrcode-1.5.0.tgz}
-    name: '@types/qrcode'
-    version: 1.5.0
-    dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/18.14.5
-    dev: true
 
   registry.npmmirror.com/@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/qs/-/qs-6.9.7.tgz}
@@ -3776,7 +3764,7 @@ packages:
       minipass-pipeline: registry.npmmirror.com/minipass-pipeline/1.2.4
       mkdirp: registry.npmmirror.com/mkdirp/1.0.4
       p-map: registry.npmmirror.com/p-map/4.0.0
-      promise-inflight: registry.npmmirror.com/promise-inflight/1.0.1_bluebird@3.7.2
+      promise-inflight: registry.npmmirror.com/promise-inflight/1.0.1
       rimraf: registry.npmmirror.com/rimraf/3.0.2
       ssri: registry.npmmirror.com/ssri/8.0.1
       tar: registry.npmmirror.com/tar/6.1.13
@@ -6801,6 +6789,7 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
 
   registry.npmmirror.com/follow-redirects/1.15.2_debug@2.6.9:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.2.tgz}
@@ -6816,6 +6805,21 @@ packages:
     dependencies:
       debug: registry.npmmirror.com/debug/2.6.9
     dev: false
+
+  registry.npmmirror.com/follow-redirects/1.15.2_debug@4.3.4:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.2.tgz}
+    id: registry.npmmirror.com/follow-redirects/1.15.2
+    name: follow-redirects
+    version: 1.15.2
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: registry.npmmirror.com/debug/4.3.4
+    dev: true
 
   registry.npmmirror.com/for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/for-each/-/for-each-0.3.3.tgz}
@@ -7721,7 +7725,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: registry.npmmirror.com/eventemitter3/4.0.7
-      follow-redirects: registry.npmmirror.com/follow-redirects/1.15.2
+      follow-redirects: registry.npmmirror.com/follow-redirects/1.15.2_debug@4.3.4
       requires-port: registry.npmmirror.com/requires-port/1.0.0
     transitivePeerDependencies:
       - debug
@@ -11153,6 +11157,17 @@ packages:
     name: progress
     version: 2.0.3
     engines: {node: '>=0.4.0'}
+
+  registry.npmmirror.com/promise-inflight/1.0.1:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/promise-inflight/-/promise-inflight-1.0.1.tgz}
+    name: promise-inflight
+    version: 1.0.1
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dev: true
 
   registry.npmmirror.com/promise-inflight/1.0.1_bluebird@3.7.2:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/promise-inflight/-/promise-inflight-1.0.1.tgz}
