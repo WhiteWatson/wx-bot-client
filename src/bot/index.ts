@@ -1,8 +1,6 @@
 import { WechatyBuilder } from "wechaty";
 import store from "@/store";
-import { sendMessage } from "./chatgpt/main";
 import { ContactSelfInterface } from "wechaty/impls";
-import { firstName } from "./config";
 import { onMessage } from "./onMessage";
 
 export let botName: string | ContactSelfInterface | undefined;
