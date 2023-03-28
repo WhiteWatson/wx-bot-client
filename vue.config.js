@@ -7,6 +7,7 @@ module.exports = defineConfig({
   pluginOptions: {
     electronBuilder: {
       nodeIntegration: true,
+      preload: "src/preload.ts",
       builderOptions: {
         nsis: {
           allowToChangeInstallationDirectory: true,

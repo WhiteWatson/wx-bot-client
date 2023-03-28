@@ -65,11 +65,13 @@
   "resolutions": {
     "watchdog": "0.9.2",
     "state-switch": "1.7.1",
-    "rx-queue": "file:./self_modules/rx-queue"
+    "rx-queue": "file:./self_modules/rx-queue",
+    "wechaty-puppet-wechat": "file:./self_modules/wechaty-puppet-wechat"
   },
   "overrides": {
     "wechaty": {
-      "rx-queue": "file:./rx-queue"
+      "rx-queue": "file:./rx-queue",
+      "wechaty-puppet-wechat": "file:./self_modules/wechaty-puppet-wechat"
     }
   }
 }

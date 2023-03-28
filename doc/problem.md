@@ -95,3 +95,11 @@ to
 
 
 ## 打包后state_switch_1.BooleanIndicator is not a constructor
+系包版本问题
+
+在package.json文件中填写如下配置，并用yarn或pnpm重新安装依赖
+```
+"resolutions": {
+  "state-switch": "1.7.1",
+},
+```

@@ -1,0 +1,17 @@
+import { ScanStatus } from 'wechaty-puppet/types';
+export function normalizeScanStatus(status) {
+    switch (status) {
+        case 0:
+            return ScanStatus.Waiting;
+        case 200:
+            return ScanStatus.Confirmed;
+        case 201:
+            return ScanStatus.Scanned;
+        case 408:
+            // No scan after 2 minute ...
+            return ScanStatus.Timeout;
+        default:
+            throw new Error('unsupported scan status: ' + status);
+    }
+}
+//# sourceMappingURL=normalize-scan-status.js.map
