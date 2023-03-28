@@ -35,7 +35,7 @@ const wechaty_puppet_1 = require("wechaty-puppet");
 const config_js_1 = require("./config.js");
 const cjs_js_1 = require("./cjs.js");
 const mod_js_1 = require("./pure-function-helpers/mod.js");
-const { ipcRenderer } = require('electron');
+const path = require("path");
 class Bridge extends events_1.EventEmitter {
     options;
     browser;
@@ -87,6 +87,7 @@ class Bridge extends events_1.EventEmitter {
         if (this.options.endpoint) {
             launchOptions.executablePath = this.options.endpoint;
         }
+        let browserDir = path.join(__dirname).split("app.asar")[0] + "app.asar.unpacked\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe"
         const options = {
             ...launchOptions,
             args: [
@@ -102,8 +103,10 @@ class Bridge extends events_1.EventEmitter {
                 ...launchOptionsArgs,
             ],
             headless,
-            executablePath: "D:\\bai\\wx-bot\\node_modules\\.pnpm\\registry.npmmirror.com+puppeteer@13.7.0\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe"
+            executablePath: browserDir
+            // executablePath: "D:\\FUTURE\\APP\\wx-bot-client\\node_modules\\.pnpm\\registry.npmmirror.com+puppeteer@13.7.0\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe"
         };
+        console.log("项目目录：", path.join(__dirname));
         wechaty_puppet_1.log.verbose('PuppetWeChatBridge', 'initBrowser() with options=%s', JSON.stringify(options));
         let browser;
         if (!this.options.stealthless) {
