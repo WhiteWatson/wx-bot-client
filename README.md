@@ -4,14 +4,37 @@
 <img align="right" alt="GIF" height="160px" src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" />
 
 ---
+## 搭建方式
+### 下载&安装
+[releases包下载地址](https://github.com/LittleCCB/wx-bot-client/releases)，在这里你可以下载到已经构建好的 **.exe安装包(windows)**，下载过程中下载软件可能提示文件不安全，可以忽略此提示，下载完成后本地安装即可。
 
-## I'm a Computer Science and Engineering Student  
+### 托管你的微信
+打开软件，点击**开始使用吧**按钮，等待二维码出现，二维码出现后使用微信扫描二维码即可登录并托管微信。
 
-- 👨‍💻 I’m currently working on web development technologies like JavaScript, Vue etc.
-- 💪🏼 Future Goals: Learn more technologies - Never stop creating new ideas.
-- ⚡ Fun fact: I love to play Genshin Impact.
+![markdown picture](./doc/images/one.png)
 
-## Quick Start
+tips: 国内使用请挂梯子，否则API不通过，AI会一直处于思考状态
+
+---
+## 功能简介
+### AI文字对话能力
+
+```
+提问格式： /ai + 问题内容
+
+例：/ai 你是谁？
+```
+
+### AI生成图片能力
+```
+提问格式： /image + 图片提示词
+
+例：/image Closeup face portrait of a girl, smooth soft skin, big dreamy eyes, beautiful intricate colored hair, symmetrical, anime wide eyes, soft lighting, detailed face, by makoto shinkai, stanley artgerm lau, wlop, rossdraws, concept art, digital painting, looking into camera
+```
+
+---
+
+## 自定义部署
 此项目本地运行依赖node环境
 
 ### 安装依赖
@@ -32,6 +55,13 @@ npm run electron:serve
 ```
 npm run electron:build
 ```
+---
+## I'm a Computer Science and Engineering Student  
+
+- 👨‍💻 I’m currently working on web development technologies like JavaScript, Vue etc.
+- 💪🏼 Future Goals: Learn more technologies - Never stop creating new ideas.
+- ⚡ Fun fact: I love to play Genshin Impact.
+
 
 ### Languages and Tools 🛠 
 
