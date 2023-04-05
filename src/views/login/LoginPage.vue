@@ -85,7 +85,7 @@
           </div>
         </v-card-text>
         <v-card-text class="py-2 white--text text-center">
-          {{ new Date().getFullYear() }} — <strong>WxBotClient</strong>
+          {{ new Date().getFullYear() }} — <strong>WxBotClient</strong> <a class="github-link" @click="openExternal('https://github.com/LittleCCB/wx-bot-client')" href="">GitHub</a>
         </v-card-text>
       </v-card>
     </v-footer>
@@ -170,6 +170,10 @@ export default class Login extends Vue {
     this.$store.commit("user/SET_LOGINQRCODE", "");
     wxBot.logout();
     wxBot.stop();
+  }
+
+  openExternal(href:string) {
+    (window as any).shell.openExternal(href)
   }
 
   beforeMount() {
@@ -304,5 +308,9 @@ export default class Login extends Vue {
 }
 .login-footer {
   width: 100%;
+}
+
+.github-link {
+  color: #fff;
 }
 </style>

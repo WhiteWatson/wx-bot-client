@@ -1,5 +1,4 @@
-// import { ipcRenderer } from "electron";
-import puppeteer from "puppeteer";
+import { shell } from "electron";
 import puppeteerExtra from "puppeteer-extra";
 
 (window as any).ipc = {
@@ -9,3 +8,5 @@ import puppeteerExtra from "puppeteer-extra";
     return browser;
   },
 };
+
+(window as any).shell = shell;

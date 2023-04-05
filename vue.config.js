@@ -13,6 +13,9 @@ module.exports = defineConfig({
           allowToChangeInstallationDirectory: true,
           oneClick: false,
         },
+        win: {
+          icon: './icons/icon.ico'
+        },
         productName: "WxBotClient",
         mac: {
           target: ["dmg", "zip"],

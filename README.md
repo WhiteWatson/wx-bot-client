@@ -98,5 +98,7 @@ npm run electron:build
   
 <br/>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+---
+## 加群交流体验内测新功能
+
+<img src="./doc/images/groupimg.jpg" alt="drawing" width="300"/>

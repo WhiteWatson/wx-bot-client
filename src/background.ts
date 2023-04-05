@@ -1,7 +1,7 @@
 "use strict";
 
 import path from "path";
-import { app, protocol, BrowserWindow, ipcMain } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, Tray, Menu, Notification } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import puppeteer from "puppeteer";
@@ -15,36 +15,21 @@ protocol.registerSchemesAsPrivileged([
 
 console.log("ELECTRON_NODE_INTEGRATION", process.env.ELECTRON_NODE_INTEGRATION);
 
+let tray = null;
+
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1440,
     height: 800,
     webPreferences: {
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: true,
       contextIsolation: false,
       webSecurity: false,
       preload: path.join(__dirname, "/preload.js"),
     },
+    icon: path.join(__dirname, "../icons/icon.ico")
   });
-
-  // 解决electron跨域
-  // win.webContents.session.webRequest.onBeforeSendHeaders(
-  //   (details, callback) => {
-  //     callback({ requestHeaders: { Origin: "*", ...details.requestHeaders } });
-  //   }
-  // );
-
-  // win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
-  //   callback({
-  //     responseHeaders: {
-  //       "Access-Control-Allow-Origin": ["*"],
-  //       ...details.responseHeaders,
-  //     },
-  //   });
-  // });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -60,6 +45,38 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  win.on("close", (e) => {
+    e.preventDefault(); // 阻止退出程序
+    new Notification({
+      title: "WxBotClient已缩小到托盘",
+      body: "彻底关闭软件请在任务栏右键关闭",
+    }).show();
+    win.setSkipTaskbar(true); // 取消任务栏显示
+    win.hide(); // 隐藏主程序窗口
+  });
+
+  // 创建任务栏图标
+  tray = new Tray(path.join(__dirname, "../icons/icon.ico"));
+
+  // 自定义托盘图标的内容菜单
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      // 点击退出菜单退出程序
+      label: "退出",
+      click: function () {
+        win.destroy();
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setToolTip("demo"); // 设置鼠标指针在托盘图标上悬停时显示的文本
+  tray.setContextMenu(contextMenu); // 设置图标的内容菜单
+  // 点击托盘图标，显示主窗口
+  tray.on("click", () => {
+    win.show();
+  });
 
   ipcMain.handle("launch-browser", async (event, data) => {
     const opt = {

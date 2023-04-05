@@ -1,4 +1,4 @@
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { ChatCompletionRequestMessage, Configuration, CreateCompletionRequestPrompt, OpenAIApi } from "openai";
 import { chatGptConfig } from "../config";
 
 const MAX_QBS = 3;
@@ -19,6 +19,29 @@ export const sendMessage = (message: ChatCompletionRequestMessage[]) => {
         .createChatCompletion({
           model: "gpt-3.5-turbo",
           messages: message,
+        })
+        .then((res) => {
+          qbs--;
+          resolve(res.data.choices);
+        })
+        .catch((err) => {
+          qbs--;
+          rejects(err);
+        });
+    } else {
+      rejects("请求过于频繁");
+    }
+  });
+};
+
+export const sendMessageByPrompt = (prompt:CreateCompletionRequestPrompt | null) => {
+  return new Promise((resolve, rejects) => {
+    if (qbs <= MAX_QBS) {
+      qbs++;
+      openai
+        .createCompletion({
+          model: "gpt-3.5-turbo",
+          prompt,
         })
         .then((res) => {
           qbs--;

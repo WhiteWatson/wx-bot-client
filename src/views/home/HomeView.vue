@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <v-btn elevation="3" raised x-large @click="test">测试chatgpt</v-btn>
+    <h1>欢迎使用WxBotClient</h1>
+    <h3>加群交流体验内测新功能</h3>
+    <div class="img-box">
+      <img class="group-img" src="@/assets/groupimg.jpg">
+      <img class="gif-img" src="https://oss-chatgpt.oss-cn-beijing.aliyuncs.com/attr/model.gif">
+    </div>
   </div>
 </template>
 
@@ -14,8 +19,6 @@ import { openai, sendMessage } from "@/bot/chatgpt/main";
 export default class Home extends Vue {
   async test() {
     console.log("openai:", openai);
-    // let listmodels = await openai.listModels();
-    // console.log("listModels:", listmodels);
   }
 
   beforeMount() {
@@ -23,4 +26,18 @@ export default class Home extends Vue {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home {
+  margin: 20px 70px;
+}
+.img-box {
+  display: flex;
+}
+.group-img {
+  height: 300px;
+  margin-right: 20px;
+}
+.gif-img {
+  margin: 15px 0;
+}
+</style>
