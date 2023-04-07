@@ -85,7 +85,13 @@
           </div>
         </v-card-text>
         <v-card-text class="py-2 white--text text-center">
-          {{ new Date().getFullYear() }} — <strong>WxBotClient</strong> <a class="github-link" @click="openExternal('https://github.com/LittleCCB/wx-bot-client')" href="">GitHub</a>
+          {{ new Date().getFullYear() }} — <strong>WxBotClient</strong>
+          <a
+            class="github-link"
+            @click="openExternal('https://github.com/LittleCCB/wx-bot-client')"
+            href=""
+            >GitHub</a
+          >
         </v-card-text>
       </v-card>
     </v-footer>
@@ -102,7 +108,34 @@
         </div>
       </div>
     </v-dialog>
-    <!-- <v-btn elevation="3" raised x-large @click="loggedOut">登出</v-btn> -->
+
+    <v-dialog v-model="welcomeDialog" persistent class="v-dialog" width="500">
+      <div class="dialog-content">
+        <div class="dialog-title">~Welcome~</div>
+        <div class="dialog-desc">
+          <span>加入项目交流群，催促作者开发新功能</span>
+          <div class="img-box">
+            <img class="group-img" src="@/assets/groupimg.jpg" />
+            <img
+              class="gif-img"
+              src="https://oss-chatgpt.oss-cn-beijing.aliyuncs.com/attr/model.gif"
+            />
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <v-btn text @click="welcomeDialog = false"> 好的 </v-btn>
+          <v-btn
+            @click="
+              openExternal(
+                'https://wx.zsxq.com/dweb2/index/group/51112142882244'
+              )
+            "
+          >
+            加入知识星球
+          </v-btn>
+        </div>
+      </div>
+    </v-dialog>
   </div>
 </template>
 
@@ -119,6 +152,7 @@ export default class Login extends Vue {
   startLoading = false;
   tipsText = "Let me help you!";
   dialog = false;
+  welcomeDialog = true;
 
   @Ref() readonly typewriter!: any;
 
@@ -172,8 +206,8 @@ export default class Login extends Vue {
     wxBot.stop();
   }
 
-  openExternal(href:string) {
-    (window as any).shell.openExternal(href)
+  openExternal(href: string) {
+    (window as any).shell.openExternal(href);
   }
 
   beforeMount() {
@@ -248,6 +282,18 @@ export default class Login extends Vue {
   .tip-text {
     vertical-align: text-bottom;
   }
+}
+
+.img-box {
+  display: flex;
+  align-items: center;
+}
+.group-img {
+  height: 300px;
+  margin-right: 20px;
+}
+.gif-img {
+  margin: 15px 0;
 }
 
 .start {

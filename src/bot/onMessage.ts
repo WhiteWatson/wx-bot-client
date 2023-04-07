@@ -1,7 +1,7 @@
 import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
-import { FileBox } from "file-box";
-import { firstName, jiaweisi } from "./config";
+// import { FileBox } from "file-box";
+import { firstName, jiaweisi, replayObj } from "./config";
 import { sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import {
@@ -66,15 +66,19 @@ const roomMessage = (message: MessageInterface) => {
   }
   if (roomList.get(message.room()?.id)) {
     // 存在roomList缓存里
-    startAI(message, roomList.get(message.room()?.id));
+    startAI(message, roomList.get(message.room()?.id), false);
     return;
   }
-  startAI(message, []);
+  startAI(message, [], false);
 };
 
-const startAI = async (message: MessageInterface, history: any) => {
+const startAI = async (
+  message: MessageInterface,
+  history: any,
+  noSelf = true
+) => {
   if (firstName.includes(message.text().substring(0, 3))) {
-    if (message.from()?.payload?.name !== botName) {
+    if (message.from()?.payload?.name !== botName || noSelf) {
       message.say("AI正在思考，请稍后...");
       const user_input = message.text().substring(3);
       const messages: ChatCompletionRequestMessage[] = [];
@@ -85,6 +89,19 @@ const startAI = async (message: MessageInterface, history: any) => {
       messages.push({ role: "user", content: user_input });
       sendMessage(messages).then((res: any) => {
         const completion_text = res[0].message.content;
+        let key: keyof any;
+        for (key in replayObj) {
+          if (user_input.trim().startsWith(key)) {
+            message.say(
+              `@${message.from()?.payload?.name} ${completion_text}\n ${
+                replayObj[key]
+              }`
+            );
+            history.push([user_input, completion_text]);
+            roomList.set(message.room()?.id || message.from()?.id, history);
+            return;
+          }
+        }
         message.say(`@${message.from()?.payload?.name} ${completion_text}`);
         history.push([user_input, completion_text]);
         roomList.set(message.room()?.id || message.from()?.id, history);
@@ -103,17 +120,6 @@ const startAI = async (message: MessageInterface, history: any) => {
       console.log("prediction", res);
       const withImage = await withImageLoad(message, res.data);
       console.log("withImage", withImage);
-
-      // loadReplicateImage(res.data).then(image => {
-      //   console.log("生成图像", image);
-      //   message.say(`@${message.from()?.payload?.name} ${image}`);
-      // })
-      // setTimeout(() => {
-      //   loadReplicateImage(res.data).then(image => {
-      //   console.log("生成图像2", image.data.prediction.output[0]);
-      //   message.say(`@${message.from()?.payload?.name} ${image}`);
-      //   })
-      // }, 10000);
     });
   }
 };
@@ -147,22 +153,3 @@ const withImageLoad = async (
     withImageLoad(message, prediction, time++);
   }, 2000);
 };
-
-// const imageUrlToBase64 = (url: string) => {
-//   //一定要设置为let，不然图片不显示
-//   let image = new Image();
-//   //解决跨域问题
-//   image.setAttribute('crossOrigin', 'anonymous');
-//   image.src = url
-//   //image.onload为异步加载
-//   image.onload = () => {
-//     var canvas = document.createElement("canvas");
-//     canvas.width = image.width;
-//     canvas.height = image.height;
-//     canvas.getContext('2d')?.drawImage(image, 0, 0, image.width, image.height);
-//     var quality = 0.8;
-//     //这里的dataurl就是base64类型
-//     return canvas.toDataURL("image/jpeg", quality);//使用toDataUrl将图片转换成jpeg的格式,不要把图片压缩成png，因为压缩成png后base64的字符串可能比不转换前的长！
-//   }
-//   return ''
-// }

@@ -1,7 +1,15 @@
 "use strict";
 
 import path from "path";
-import { app, protocol, BrowserWindow, ipcMain, Tray, Menu, Notification } from "electron";
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  ipcMain,
+  Tray,
+  Menu,
+  Notification,
+} from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import puppeteer from "puppeteer";
@@ -28,7 +36,7 @@ async function createWindow() {
       webSecurity: false,
       preload: path.join(__dirname, "/preload.js"),
     },
-    icon: path.join(__dirname, "../icons/icon.ico")
+    icon: path.join(__dirname, "./icon.ico"),
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -57,7 +65,7 @@ async function createWindow() {
   });
 
   // 创建任务栏图标
-  tray = new Tray(path.join(__dirname, "../icons/icon.ico"));
+  tray = new Tray(path.join(__dirname, "./icon.ico"));
 
   // 自定义托盘图标的内容菜单
   const contextMenu = Menu.buildFromTemplate([
