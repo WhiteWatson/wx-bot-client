@@ -105,7 +105,13 @@ const startAI = async (
         message.say(`@${message.from()?.payload?.name} ${completion_text}`);
         history.push([user_input, completion_text]);
         roomList.set(message.room()?.id || message.from()?.id, history);
-      });
+      })
+      .catch((err) => {
+        if (err.message === "Network Error") {
+          message.say(`@${message.from()?.payload?.name} 快去告诉管理员，服务出现网络错误，让他麻溜修0_0`);
+          return;
+        }
+      })
     }
   }
   if (message.text().startsWith("/image")) {
@@ -115,11 +121,8 @@ const startAI = async (
       } 提示词请用英语描述！！！\n生成的图片地址请复制浏览器打开\n生成图像时间较长，请稍后...`
     );
     const texts = message.text().replace("/image", "");
-    console.log("propty", texts);
     getImageByStableDiffusion(texts).then(async (res: any) => {
-      console.log("prediction", res);
       const withImage = await withImageLoad(message, res.data);
-      console.log("withImage", withImage);
     });
   }
 };
@@ -135,7 +138,6 @@ const withImageLoad = async (
   }
   setTimeout(async () => {
     const res = await loadReplicateImage(prediction);
-    console.log("当前状态：", res.data?.prediction?.status);
     if (res.data?.prediction?.status === "failed") {
       message.say(`@${message.from()?.payload?.name} 出现未知错误，请重试...`);
       return;

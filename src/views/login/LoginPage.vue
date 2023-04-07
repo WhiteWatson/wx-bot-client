@@ -104,7 +104,7 @@
           key，为了防止你的管家失联，请勿关闭此程序。
         </div>
         <div class="dialog-footer">
-          <v-btn text @click="$router.push('/home')"> 我知道了 </v-btn>
+          <v-btn text @click="$router.push('/home')"> 去往管理页面(正在开发) </v-btn>
         </div>
       </div>
     </v-dialog>

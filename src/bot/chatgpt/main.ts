@@ -12,7 +12,7 @@ const configuration = new Configuration({
 export const openai = new OpenAIApi(configuration);
 
 export const sendMessage = (message: ChatCompletionRequestMessage[]) => {
-  return new Promise((resolve, rejects) => {
+  return new Promise((resolve, reject) => {
     if (qbs <= MAX_QBS) {
       qbs++;
       openai
@@ -26,16 +26,16 @@ export const sendMessage = (message: ChatCompletionRequestMessage[]) => {
         })
         .catch((err) => {
           qbs--;
-          rejects(err);
+          reject(err);
         });
     } else {
-      rejects("请求过于频繁");
+      reject("请求过于频繁");
     }
   });
 };
 
 export const sendMessageByPrompt = (prompt:CreateCompletionRequestPrompt | null) => {
-  return new Promise((resolve, rejects) => {
+  return new Promise((resolve, reject) => {
     if (qbs <= MAX_QBS) {
       qbs++;
       openai
@@ -49,10 +49,10 @@ export const sendMessageByPrompt = (prompt:CreateCompletionRequestPrompt | null)
         })
         .catch((err) => {
           qbs--;
-          rejects(err);
+          reject(err);
         });
     } else {
-      rejects("请求过于频繁");
+      reject("请求过于频繁");
     }
   });
 };
