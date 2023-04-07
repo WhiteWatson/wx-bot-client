@@ -3,10 +3,6 @@
 
 <img align="right" alt="GIF" height="160px" src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" />
 
----
-## 加群交流体验内测新功能
-
-<img src="./doc/images/groupimg.jpg" alt="drawing" width="300"/>
 
 ---
 ## 搭建方式
@@ -102,3 +98,7 @@ npm run electron:build
 </div
   
 <br/>
+---
+## 加群交流体验内测新功能
+
+<img src="./doc/images/groupimg.jpg" alt="drawing" width="300"/>
