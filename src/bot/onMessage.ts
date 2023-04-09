@@ -78,17 +78,22 @@ const startAI = async (
   noSelf = true
 ) => {
   if (firstName.includes(message.text().substring(0, 3))) {
-    if (message.from()?.payload?.name !== botName || noSelf) {
-      message.say("AI正在思考，请稍后...");
-      const user_input = message.text().substring(3);
-      const messages: ChatCompletionRequestMessage[] = [];
-      for (const [input_text, completion_text] of history) {
-        messages.push({ role: "user", content: input_text });
-        messages.push({ role: "assistant", content: completion_text });
-      }
-      messages.push({ role: "user", content: user_input });
-      sendMessage(messages).then((res: any) => {
+    // if (message.from()?.payload?.name !== botName || noSelf) {
+    message.say("AI正在思考，请稍后...");
+    const user_input = message.text().substring(3);
+    const messages: ChatCompletionRequestMessage[] = [];
+    for (const [input_text, completion_text] of history) {
+      messages.push({ role: "user", content: input_text });
+      messages.push({ role: "assistant", content: completion_text });
+    }
+    messages.push({ role: "user", content: user_input });
+    sendMessage(messages).then((res: any) => {
+      try {
         const completion_text = res[0].message.content;
+        if (completion_text.length > 1500) {
+          message.say(`@${message.from()?.payload?.name} 回复长度超长，微信最大支持1500字回复，请重新提问`);
+          return;
+        }
         let key: keyof any;
         for (key in replayObj) {
           if (user_input.trim().startsWith(key)) {
@@ -105,15 +110,41 @@ const startAI = async (
         message.say(`@${message.from()?.payload?.name} ${completion_text}`);
         history.push([user_input, completion_text]);
         roomList.set(message.room()?.id || message.from()?.id, history);
-      })
-      .catch((err) => {
-        if (err.message === "Network Error") {
-          message.say(`@${message.from()?.payload?.name} 快去告诉管理员，服务出现网络错误，让他麻溜修0_0`);
+      } catch (error) {
+        console.log("回复出错了：", error);
+      }
+    })
+    .catch((err) => {
+      console.log("出错了：", err.status, JSON.stringify(err));
+      if (err.message === "Network Error") {
+        message.say(`@${message.from()?.payload?.name} 快去告诉管理员，服务出现网络错误，让他麻溜修0_0`);
+        return;
+      }
+      if (err.message == "Request failed with status code 400") {
+        message.say(`@${message.from()?.payload?.name} AI记忆已满，即将自动清除记忆，请稍后重试`);
+        if (roomList.get(message.room()?.id)) {
+          roomList.delete(message.room()?.id);
+          message.say(`@${message.from()?.payload?.name} 本群记忆已清除...`);
           return;
         }
-      })
-    }
+        message.say(`@${message.from()?.payload?.name} 本群并无记忆...`);
+        return;
+      }
+      if (err.message == "Request failed with status code 401") {
+        message.say(`@${message.from()?.payload?.name} APIKEY或者organization出错，请联系管理员`);
+        return;
+      }
+      if (err.message == "Request failed with status code 429") {
+        message.say(`@${message.from()?.payload?.name} 出现429模型重载错误，快去告诉管理员`);
+        return;
+      }
+      if (err.message == "Request failed with status code 524") {
+        message.say(`@${message.from()?.payload?.name} AI思考超时，请重新提问`);
+        return;
+      }
+    })
   }
+  // }
   if (message.text().startsWith("/image")) {
     message.say(
       `@${
