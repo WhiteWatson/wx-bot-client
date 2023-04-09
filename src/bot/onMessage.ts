@@ -2,11 +2,12 @@ import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
 // import { FileBox } from "file-box";
 import { firstName, jiaweisi, replayObj } from "./config";
-import { sendMessage } from "./chatgpt/main";
+import { sendMessage, sendMessageByPrompt } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import {
   getImageByStableDiffusion,
   loadReplicateImage,
+  textToImagePrompt,
 } from "./replicate/request";
 
 const history: any = [];
@@ -89,10 +90,13 @@ const startAI = async (
     messages.push({ role: "user", content: user_input });
     sendMessage(messages).then((res: any) => {
       try {
-        const completion_text = res[0].message.content;
+        let completion_text = res[0].message.content;
         if (completion_text.length > 1500) {
-          message.say(`@${message.from()?.payload?.name} 回复长度超长，微信最大支持1500字回复，请重新提问`);
+          message.say(`@${message.from()?.payload?.name} 回复长度超长，微信最大支持1500字回复，请重新提问并限制回复长度`);
           return;
+        }
+        if (completion_text.indexOf("OpenAI") !== -1) {
+          completion_text += replayObj.你是谁;
         }
         let key: keyof any;
         for (key in replayObj) {
@@ -138,14 +142,27 @@ const startAI = async (
         message.say(`@${message.from()?.payload?.name} 出现429模型重载错误，快去告诉管理员`);
         return;
       }
-      if (err.message == "Request failed with status code 524") {
-        message.say(`@${message.from()?.payload?.name} AI思考超时，请重新提问`);
-        return;
-      }
+      message.say(`@${message.from()?.payload?.name} ${err.message} AI思考超时，请重新提问`);
     })
   }
   // }
   if (message.text().startsWith("/image")) {
+    message.say(
+      `@${
+        message.from()?.payload?.name
+      } 由于算力以及模型本身问题，AI生成图片可能引起不适，请做好心里准备 \n生成的图片地址请复制浏览器打开\n生成图像时间较长，请稍后...`
+    );
+    const texts = message.text().replace("/image", "");
+    const ttiGptPrompt = textToImagePrompt(texts);
+    sendMessageByPrompt(ttiGptPrompt).then((res: any) => {
+      const completion_text = res[0].text;
+      message.say(`@${message.from()?.payload?.name} 咒语生成完毕，正在生成图片...`);
+      getImageByStableDiffusion(completion_text).then(async (res: any) => {
+        const withImage = await withImageLoad(message, res.data);
+      });
+    });
+  }
+  if (message.text().startsWith("/enimage")) {
     message.say(
       `@${
         message.from()?.payload?.name

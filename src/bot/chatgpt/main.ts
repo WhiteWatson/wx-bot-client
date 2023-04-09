@@ -18,6 +18,7 @@ export const sendMessage = (message: ChatCompletionRequestMessage[]) => {
       openai
         .createChatCompletion({
           model: "gpt-3.5-turbo",
+          temperature: chatGptConfig.temperature,
           messages: message,
         })
         .then((res) => {
@@ -40,8 +41,10 @@ export const sendMessageByPrompt = (prompt:CreateCompletionRequestPrompt | null)
       qbs++;
       openai
         .createCompletion({
-          model: "gpt-3.5-turbo",
+          model: "text-davinci-003",
           prompt,
+          max_tokens: 256,
+          temperature: 0,
         })
         .then((res) => {
           qbs--;
