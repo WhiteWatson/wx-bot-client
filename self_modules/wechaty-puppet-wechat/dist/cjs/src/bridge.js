@@ -124,7 +124,7 @@ class Bridge extends events_1.EventEmitter {
         ...launchOptionsArgs,
       ],
       headless,
-      // executablePath: browserDir
+      // executablePath: browserDir,
       // executablePath: "D:\\FUTURE\\APP\\wx-bot-client\\node_modules\\.pnpm\\registry.npmmirror.com+puppeteer@13.7.0\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe"
     };
     console.log("项目目录：", path.join(__dirname));
