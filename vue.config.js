@@ -14,7 +14,7 @@ module.exports = defineConfig({
           oneClick: false,
         },
         win: {
-          icon: './icons/icon.ico'
+          icon: "/src/assets/icons/icon.ico",
         },
         productName: "WxBotClient",
         mac: {

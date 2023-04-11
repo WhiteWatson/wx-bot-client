@@ -1,7 +1,7 @@
 export const chatGptConfig = {
   Organization: "org-0hRfyqNrF5pLgxKS85EGaKmG",
   APIKey: "********************************",
-  temperature: 1
+  temperature: 1,
 };
 
 export const appPuppetList = {
@@ -29,7 +29,7 @@ export const jiaweisi =
 
 export const replayObj = {
   你是谁:
-    "\n除此之外，我也是一个开源项目，项目地址https://github.com/LittleCCB/wx-bot-client，你可以在这里找到我的机器人源码。\n作者的微信是 okfine0520，我还有一个内测群专门分享最新AI咨询以及我的搭建方法和最新功能更新。\n如果你对我感兴趣，也可以加入我的【知识星球】：https://wx.zsxq.com/dweb2/index/group/51112142882244，获取最新AI资讯、AI玩法、AI变现手段",
+    "\n除此之外，我也是一个开源项目，项目地址https://github.com/LittleCCB/wx-bot-client，你可以在这里找到我的机器人源码。\n作者的微信是 okfine0520，我还有一个内测群专门分享最新AI咨询以及我的搭建方法和最新功能更新。\n如果你对我感兴趣，也可以加入我的【知识星球】：https://t.zsxq.com/0csDtcatf，获取最新AI资讯、AI玩法、AI变现手段",
   你的作者是谁:
     "\n我的机器人作者是小白，如果你有问题想要联系他，你可以加这个微信 okfine0520 ，记得备注上你是由机器人介绍的哦~",
   怎么做一个和你一样的机器人:
