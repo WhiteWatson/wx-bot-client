@@ -111,7 +111,7 @@
       </div>
     </v-dialog>
 
-    <v-dialog v-model="welcomeDialog" persistent class="v-dialog" width="500">
+    <v-dialog v-model="welcomeDialog" persistent class="v-dialog" width="550">
       <div class="dialog-content">
         <div class="dialog-title">~Welcome~</div>
         <div class="dialog-desc">

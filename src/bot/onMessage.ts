@@ -147,6 +147,8 @@ const startAI = async (
   }
   // }
   if (message.text().startsWith("/image")) {
+    message.say(`@${message.from()?.payload?.name} sorry，图片生成功能暂时关闭...`);
+    return
     message.say(
       `@${
         message.from()?.payload?.name
@@ -163,6 +165,8 @@ const startAI = async (
     });
   }
   if (message.text().startsWith("/enimage")) {
+    message.say(`@${message.from()?.payload?.name} sorry，图片生成功能暂时关闭...`);
+    return
     message.say(
       `@${
         message.from()?.payload?.name
