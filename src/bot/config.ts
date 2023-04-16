@@ -4,6 +4,10 @@ export const chatGptConfig = {
   temperature: 1
 };
 
+export const wxBotConfig = {
+  singleChat: false,
+}
+
 export const appPuppetList = {
   wechat: {
     puppet: "wechaty-puppet-official-account",
