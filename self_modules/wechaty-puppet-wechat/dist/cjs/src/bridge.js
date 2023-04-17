@@ -109,24 +109,47 @@ class Bridge extends events_1.EventEmitter {
     let browserDir =
       path.join(__dirname).split("app.asar")[0] +
       "app.asar.unpacked\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe";
-    const options = {
-      ...launchOptions,
-      args: [
-        "--audio-output-channels=0",
-        "--disable-default-apps",
-        "--disable-translate",
-        "--disable-gpu",
-        "--disable-setuid-sandbox",
-        "--disable-sync",
-        "--hide-scrollbars",
-        "--mute-audio",
-        "--no-sandbox",
-        ...launchOptionsArgs,
-      ],
-      headless,
-      // executablePath: browserDir,
-      // executablePath: "D:\\FUTURE\\APP\\wx-bot-client\\node_modules\\.pnpm\\registry.npmmirror.com+puppeteer@13.7.0\\node_modules\\puppeteer\\.local-chromium\\win64-982053\\chrome-win\\chrome.exe"
-    };
+    console.log(
+      "+++++++++++++++++++++++++++++++++++++++++++++",
+      process.env.NODE_ENV
+    );
+    let options;
+    if (process.env.NODE_ENV !== "production") {
+      options = {
+        ...launchOptions,
+        args: [
+          "--audio-output-channels=0",
+          "--disable-default-apps",
+          "--disable-translate",
+          "--disable-gpu",
+          "--disable-setuid-sandbox",
+          "--disable-sync",
+          "--hide-scrollbars",
+          "--mute-audio",
+          "--no-sandbox",
+          ...launchOptionsArgs,
+        ],
+        headless,
+      };
+    } else {
+      options = {
+        ...launchOptions,
+        args: [
+          "--audio-output-channels=0",
+          "--disable-default-apps",
+          "--disable-translate",
+          "--disable-gpu",
+          "--disable-setuid-sandbox",
+          "--disable-sync",
+          "--hide-scrollbars",
+          "--mute-audio",
+          "--no-sandbox",
+          ...launchOptionsArgs,
+        ],
+        headless,
+        executablePath: browserDir,
+      };
+    }
     console.log("项目目录：", path.join(__dirname));
     wechaty_puppet_1.log.verbose(
       "PuppetWeChatBridge",
@@ -140,6 +163,7 @@ class Bridge extends events_1.EventEmitter {
        *   https://github.com/berstend/puppeteer-extra/issues/211#issuecomment-636283110
        */
       const plugin = (0, puppeteer_extra_plugin_stealth_1.default)();
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       plugin.onBrowser = () => {};
       puppeteer_extra_1.default.use(plugin);
       browser = await window.ipc.launchBrowser({
