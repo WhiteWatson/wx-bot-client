@@ -55,13 +55,15 @@ async function createWindow() {
   }
 
   win.on("close", (e) => {
-    e.preventDefault(); // 阻止退出程序
-    new Notification({
-      title: "WxBotClient已缩小到托盘",
-      body: "彻底关闭软件请在任务栏右键关闭",
-    }).show();
-    win.setSkipTaskbar(true); // 取消任务栏显示
-    win.hide(); // 隐藏主程序窗口
+    // e.preventDefault(); // 阻止退出程序
+    // new Notification({
+    //   title: "WxBotClient已缩小到托盘",
+    //   body: "彻底关闭软件请在任务栏右键关闭",
+    // }).show();
+    // win.setSkipTaskbar(true); // 取消任务栏显示
+    // win.hide(); // 隐藏主程序窗口
+    win.destroy();
+    app.quit();
   });
 
   // 创建任务栏图标
