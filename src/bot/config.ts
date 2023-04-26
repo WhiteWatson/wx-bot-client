@@ -1,12 +1,12 @@
 export const chatGptConfig = {
   Organization: "org-Is4xpVzAjH7xi2nGKfP51AzA",
   APIKey: "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",
-  temperature: 1
+  temperature: 1,
 };
 
 export const wxBotConfig = {
   singleChat: false,
-}
+};
 
 export const appPuppetList = {
   wechat: {
@@ -43,3 +43,5 @@ export const replayObj = {
   怎么做一个和你一样的机器人:
     "\n我的机器人作者是小白，如果你有问题想要联系他，你可以加这个微信 okfine0520 ，记得备注上你是由机器人介绍的哦~",
 };
+
+export const vipRoom = ["微信AIGC", "财大原神小窝"];

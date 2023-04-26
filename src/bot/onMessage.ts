@@ -1,7 +1,7 @@
 import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
 // import { FileBox } from "file-box";
-import { firstName, jiaweisi, replayObj, wxBotConfig } from "./config";
+import { firstName, vipRoom, replayObj, wxBotConfig } from "./config";
 import { getImageByPrompt, sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import { loadReplicateImage } from "./replicate/request";
@@ -10,7 +10,7 @@ const history: any = [];
 const roomList = new Map();
 
 export const onMessage = async (message: MessageInterface) => {
-  console.log(message.talker());
+  // console.log(message.talker());
   if (message.room()) {
     // 消息来自群聊
     roomMessage(message);
@@ -32,21 +32,11 @@ export const onMessage = async (message: MessageInterface) => {
     await message.say(`@${message.talker()?.payload?.name} 并无记忆存储...`);
     return;
   }
-  if (message.text().startsWith("/贾维斯")) {
-    const user_input = jiaweisi;
-    const messages: ChatCompletionRequestMessage[] = [];
-    for (const [input_text, completion_text] of history) {
-      messages.push({ role: "user", content: input_text });
-      messages.push({ role: "assistant", content: completion_text });
-    }
-    messages.push({ role: "user", content: user_input });
-    sendMessage(messages).then(async (res: any) => {
-      const completion_text = res[0].message.content;
-      await message.say(`@${message.talker()?.payload?.name} 贾维斯已就绪...`);
-      history.push([user_input, completion_text]);
-    });
-    return;
-  }
+  singleMessage(message);
+};
+
+const singleMessage = async (message: MessageInterface) => {
+  // console.log("来自私聊", message.talker()?.name());
   if (roomList.get(message.talker()?.id)) {
     startAI(message, roomList.get(message.talker()?.id));
     return;
@@ -55,6 +45,7 @@ export const onMessage = async (message: MessageInterface) => {
 };
 
 const roomMessage = async (message: MessageInterface) => {
+  console.log("来自群聊", message.room()?.payload?.topic);
   if (message.text().startsWith("/clear memory")) {
     if (roomList.get(message.room()?.id)) {
       roomList.delete(message.room()?.id);
@@ -64,6 +55,10 @@ const roomMessage = async (message: MessageInterface) => {
       return;
     }
     await message.say(`@${message.talker()?.payload?.name} 本群并无记忆...`);
+    return;
+  }
+  if (!vipRoom.includes(message.room()?.payload?.topic as string)) {
+    // await message.say("当前群AI服务未开启哦~~，如要开启请联系作者：okfine0520");
     return;
   }
   if (roomList.get(message.room()?.id)) {
@@ -188,7 +183,6 @@ const startAI = async (
     const texts = message.text().replace("/image", "");
     getImageByPrompt(texts)
       .then(async (res: any) => {
-        console.log("gpt img:", res);
         const imgUrl = res.data?.[0].url;
         await message.say(`@${message.talker()?.payload?.name} ${imgUrl}`);
       })
