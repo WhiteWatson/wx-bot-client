@@ -5,11 +5,16 @@ import { firstName, vipRoom, replayObj, wxBotConfig } from "./config";
 import { getImageByPrompt, sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import { loadReplicateImage } from "./replicate/request";
+import { isQuestion } from "@/utils";
 
 const history: any = [];
 const roomList = new Map();
 
 export const onMessage = async (message: MessageInterface) => {
+  if (message.talker()?.name() === botName) {
+    return;
+  }
+  console.log(isQuestion(message.text()));
   // console.log(message.talker());
   if (message.room()) {
     // 消息来自群聊
@@ -36,7 +41,14 @@ export const onMessage = async (message: MessageInterface) => {
 };
 
 const singleMessage = async (message: MessageInterface) => {
-  // console.log("来自私聊", message.talker()?.name());
+  if (
+    !wxBotConfig.singleChat &&
+    message.talker()?.name() &&
+    isQuestion(message.text())
+  ) {
+    await message.say(`@${message.talker()?.payload?.name} 单聊暂时关闭~~`);
+    return;
+  }
   if (roomList.get(message.talker()?.id)) {
     startAI(message, roomList.get(message.talker()?.id));
     return;
@@ -57,8 +69,12 @@ const roomMessage = async (message: MessageInterface) => {
     await message.say(`@${message.talker()?.payload?.name} 本群并无记忆...`);
     return;
   }
-  if (!vipRoom.includes(message.room()?.payload?.topic as string)) {
-    // await message.say("当前群AI服务未开启哦~~，如要开启请联系作者：okfine0520");
+  if (
+    isQuestion(message.text()) &&
+    !vipRoom.includes(message.room()?.payload?.topic as string)
+  ) {
+    console.log("当前会话AI服务未开启哦~~");
+    // await message.say("当前会话AI服务未开启哦~~，如要开启请联系作者：okfine0520");
     return;
   }
   if (roomList.get(message.room()?.id)) {
@@ -74,10 +90,11 @@ const startAI = async (
   history: any,
   noSelf = true
 ) => {
-  if (firstName.includes(message.text().substring(0, 3))) {
+  // if (firstName.includes(message.text().substring(0, 3))) {
+  if (isQuestion(message.text())) {
     if (message.talker()?.payload?.name !== botName) {
       await message.say("AI正在思考，请稍后...");
-      const user_input = message.text().substring(3);
+      const user_input = isQuestion(message.text()) as string;
       const messages: ChatCompletionRequestMessage[] = [];
       for (const [input_text, completion_text] of history) {
         messages.push({ role: "user", content: input_text });

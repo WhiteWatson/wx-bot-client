@@ -30,6 +30,7 @@ export const firstName = [
   "@ai",
   "@Ai",
   "@aI",
+  "@你好哇",
 ];
 
 export const jiaweisi =
@@ -44,4 +45,9 @@ export const replayObj = {
     "\n我的机器人作者是小白，如果你有问题想要联系他，你可以加这个微信 okfine0520 ，记得备注上你是由机器人介绍的哦~",
 };
 
-export const vipRoom = ["微信AIGC", "财大原神小窝"];
+export const vipRoom = [
+  "微信AIGC",
+  "财大原神小窝",
+  "AI技术交流体验2群",
+  "AI机器人技术交流2群",
+];
