@@ -20,9 +20,9 @@ tips: 国内使用请挂梯子，否则API不通过，AI会一直处于思考状
 ### AI文字对话能力
 
 ```
-提问格式： /ai + 问题内容
+提问格式： @AI + 问题内容
 
-例：/ai 你是谁？
+例：@AI 你是谁？
 ```
 
 ### AI生成图片能力
@@ -102,4 +102,11 @@ npm run electron:build
 ---
 ## 加群交流体验内测新功能
 
-<img src="./doc/images/groupimg.jpg" alt="drawing" width="300"/>
+<img src="https://web-ar.bj.bcebos.com/images/groupqrcode.jpg" alt="drawing" width="300"/>
+
+没有及时更新二维码请直接加我微信备注 "加ChatGPT群聊"
+
+微信号：okfine0520
+
+<img src="https://web-ar.bj.bcebos.com/images/mywxqrcode.jpg" alt="drawing" width="300"/>
+
