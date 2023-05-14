@@ -1,7 +1,7 @@
 import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
 // import { FileBox } from "file-box";
-import { firstName, vipRoom, replayObj, wxBotConfig } from "./config";
+import { vipRoom, replayObj, wxBotConfig } from "@/utils/constant";
 import { getImageByPrompt, sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import { loadReplicateImage } from "./replicate/request";
@@ -73,8 +73,7 @@ const roomMessage = async (message: MessageInterface) => {
     isQuestion(message.text()) &&
     !vipRoom.includes(message.room()?.payload?.topic as string)
   ) {
-    console.log("当前会话AI服务未开启哦~~");
-    // await message.say("当前会话AI服务未开启哦~~，如要开启请联系作者：okfine0520");
+    await message.say("当前会话AI服务未开启哦~~，如要开启请联系作者：okfine0520");
     return;
   }
   if (roomList.get(message.room()?.id)) {
@@ -147,7 +146,7 @@ const startAI = async (
             await message.say(
               `@${
                 message.talker()?.payload?.name
-              } 快去告诉管理员，服务出现网络错误，让他麻溜修0_0`
+              } 服务出现网络错误，请重试`
             );
             return;
           }
@@ -181,7 +180,7 @@ const startAI = async (
             await message.say(
               `@${
                 message.talker()?.payload?.name
-              } 出现429模型重载错误，快去告诉管理员`
+              } 出现429模型重载错误，请重试或查看apikey是否还有余额`
             );
             return;
           }

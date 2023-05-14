@@ -1,14 +1,12 @@
 <template>
   <div class="slider-bar">
-    <div class="slider-title pa-2 white--text text-h5">
-      WxBotClient
-    </div>
+    <div class="slider-title pa-2 white--text text-h5">WxBotClient</div>
     <div class="menu-line ml-2 mt-2 mr-3 mb-0">基础 设置</div>
-    <div class="menu">
+    <div v-if="items && items.length" class="menu">
       <div
         :class="['menu-item', { active: $route.path === item.path }]"
-        v-for="item in items"
-        :key="item.title"
+        v-for="(item, i) in items"
+        :key="i"
       >
         <div :class="['menu-item__content']" @click="jump(item)">
           <div class="quan"></div>
@@ -29,10 +27,10 @@ import { routes } from "@/router/index";
 export default class Sliderbar extends Vue {
   get items() {
     let menuList: any = [];
-    for (const key in routes) {
+    for (const key in routes?.[0]?.children) {
       if (Object.prototype.hasOwnProperty.call(routes, key)) {
         const element = routes[key];
-        if (element.path === "/") {
+        if (element.path === "/home") {
           menuList = element.children?.map(
             (item: { name?: string; path: string }) => {
               return {
@@ -59,14 +57,14 @@ export default class Sliderbar extends Vue {
 
   .menu-line {
     font-size: 12px;
-    color: rgb(231,227,252);
+    color: rgb(231, 227, 252);
 
     &::before {
-      content: '—— ';
+      content: "—— ";
     }
 
     &::after {
-      content: ' ————';
+      content: " ————";
     }
   }
 
@@ -100,7 +98,7 @@ export default class Sliderbar extends Vue {
     .quan {
       border: 2px solid rgba($color: #fff, $alpha: 1);
     }
-    
+
     .icon-right {
       color: #fff;
     }
