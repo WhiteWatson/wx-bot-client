@@ -37,3 +37,13 @@ export const vipRoom = [
   "AI技术交流体验2群",
   "AI机器人技术交流2群",
 ];
+
+export const vipUser = []
+
+export const setting = {
+  singleChat: wxBotConfig.singleChat,
+  firstName,
+  replayObj,
+  vipRoom,
+  vipUser
+}

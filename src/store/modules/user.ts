@@ -2,6 +2,7 @@ interface UserState {
   userInfo: any;
   loginQrcode: string;
   messageList: any[];
+  contactList: any[];
 }
 
 const user = {
@@ -10,6 +11,7 @@ const user = {
     userInfo: null,
     loginQrcode: "",
     messageList: [],
+    contactList: [],
   },
   getters: {},
   mutations: {
@@ -29,6 +31,9 @@ const user = {
     SET_LOGINQRCODE(state: UserState, qrcode: any) {
       console.log("code enter", qrcode);
       state.loginQrcode = qrcode;
+    },
+    SET_CONTACTLIST(state: UserState, contactList: any) {
+      state.contactList = contactList;
     },
   },
   actions: {},

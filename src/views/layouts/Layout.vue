@@ -26,7 +26,3 @@ export default class Layout extends Vue {
   drawer = true;
 }
 </script>
-
-<style lang="scss">
-@import "https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css";
-</style>

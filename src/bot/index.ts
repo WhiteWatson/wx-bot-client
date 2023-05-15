@@ -26,16 +26,15 @@ async function wxBotInit() {
       console.log(`User ${user} logged in`);
       botName = user.payload?.name;
       console.log("botName:", botName);
-
       store.commit("user/SET_LOGGED_IN", user);
+      const contactList = await wxBot.Contact.findAll();
+      store.commit("user/SET_CONTACTLIST", contactList);
     })
     .on("message", onMessage);
   try {
     await wxBot.start();
   } catch (e) {
-    console.error(
-      ` ${e}`
-    );
+    console.error(` ${e}`);
   }
 }
 export { wxBot, wxBotInit };

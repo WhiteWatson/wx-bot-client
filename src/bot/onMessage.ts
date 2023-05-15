@@ -1,16 +1,29 @@
 import { MessageInterface } from "wechaty/impls";
 import { botName } from ".";
 // import { FileBox } from "file-box";
-import { vipRoom, replayObj, wxBotConfig } from "@/utils/constant";
+// import { vipRoom, replayObj, wxBotConfig } from "@/utils/constant";
 import { getImageByPrompt, sendMessage } from "./chatgpt/main";
 import { ChatCompletionRequestMessage } from "openai";
 import { loadReplicateImage } from "./replicate/request";
 import { isQuestion } from "@/utils";
+import store from "@/store";
+
+let vipRoom: any = [];
+let replayObj: any = {};
+let singleChat: any = false;
+
+const initDate = () => {
+  const storeSetting = store.getters?.getSetting?.setting;
+  vipRoom = storeSetting.vipRoom;
+  replayObj = storeSetting.replayObj;
+  singleChat = storeSetting.singleChat;
+};
 
 const history: any = [];
 const roomList = new Map();
 
 export const onMessage = async (message: MessageInterface) => {
+  initDate();
   if (message.talker()?.name() === botName) {
     return;
   }
@@ -41,11 +54,7 @@ export const onMessage = async (message: MessageInterface) => {
 };
 
 const singleMessage = async (message: MessageInterface) => {
-  if (
-    !wxBotConfig.singleChat &&
-    message.talker()?.name() &&
-    isQuestion(message.text())
-  ) {
+  if (!singleChat && message.talker()?.name() && isQuestion(message.text())) {
     await message.say(`@${message.talker()?.payload?.name} 单聊暂时关闭~~`);
     return;
   }
@@ -73,7 +82,9 @@ const roomMessage = async (message: MessageInterface) => {
     isQuestion(message.text()) &&
     !vipRoom.includes(message.room()?.payload?.topic as string)
   ) {
-    await message.say("当前会话AI服务未开启哦~~，如要开启请联系作者：okfine0520");
+    await message.say(
+      "当前会话AI服务未开启哦~~，如要开启请联系作者：okfine0520"
+    );
     return;
   }
   if (roomList.get(message.room()?.id)) {
@@ -144,9 +155,7 @@ const startAI = async (
           console.log("出错了：", err.status, JSON.stringify(err));
           if (err.message === "Network Error") {
             await message.say(
-              `@${
-                message.talker()?.payload?.name
-              } 服务出现网络错误，请重试`
+              `@${message.talker()?.payload?.name} 服务出现网络错误，请重试`
             );
             return;
           }
