@@ -9,12 +9,14 @@ import { isQuestion } from "@/utils";
 import store from "@/store";
 
 let vipRoom: any = [];
+let vipUser: any = [];
 let replayObj: any = {};
 let singleChat: any = false;
 
 const initDate = () => {
   const storeSetting = store.getters?.getSetting?.setting;
   vipRoom = storeSetting.vipRoom;
+  vipUser = storeSetting.vipUser;
   replayObj = storeSetting.replayObj;
   singleChat = storeSetting.singleChat;
 };
@@ -55,7 +57,16 @@ export const onMessage = async (message: MessageInterface) => {
 
 const singleMessage = async (message: MessageInterface) => {
   if (!singleChat && message.talker()?.name() && isQuestion(message.text())) {
-    await message.say(`@${message.talker()?.payload?.name} 单聊暂时关闭~~`);
+    await message.say(`单聊暂时关闭~~`);
+    return;
+  }
+  if (
+    isQuestion(message.text()) &&
+    !vipUser.includes(message.talker()?.name() as string)
+  ) {
+    await message.say(
+      "当前聊天AI服务未开启哦~~，如要开启请联系作者：okfine0520"
+    );
     return;
   }
   if (roomList.get(message.talker()?.id)) {

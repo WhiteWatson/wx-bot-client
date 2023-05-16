@@ -5,8 +5,8 @@
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-btn elevation="2" icon @click="drawer = !drawer"></v-btn>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-btn elevation="2" icon @click="drawer = !drawer">-></v-btn>
+      <v-toolbar-title>WxBot后台管理</v-toolbar-title>
     </v-app-bar>
 
     <v-main class="ma-0 pa-0">

@@ -38,7 +38,7 @@ export const vipRoom = [
   "AI机器人技术交流2群",
 ];
 
-export const vipUser = []
+export const vipUser = ["咧咧"]
 
 export const setting = {
   singleChat: wxBotConfig.singleChat,
