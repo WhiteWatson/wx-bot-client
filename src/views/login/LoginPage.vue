@@ -29,7 +29,7 @@
           x-large
           transition="scale-transition"
           :loading="startLoading"
-          @click="start"
+          @click="openApikeyDialog"
           >{{ btnText || "开始使用吧" }}
         </v-btn>
       </div>
@@ -117,7 +117,10 @@
         <div class="dialog-desc">
           <span>加入项目交流群，催促作者开发新功能</span>
           <div class="img-box">
-            <img class="group-img" src="@/assets/groupimg.jpg" />
+            <img
+              class="group-img"
+              src="https://web-ar.bj.bcebos.com/images/groupqrcode.jpg"
+            />
             <img
               class="gif-img"
               src="https://oss-chatgpt.oss-cn-beijing.aliyuncs.com/attr/model.gif"
@@ -132,12 +135,44 @@
         </div>
       </div>
     </v-dialog>
+
+    <v-dialog v-model="apikeyDialog" persistent class="v-dialog" width="550">
+      <div class="dialog-content">
+        <div class="dialog-title">填写你的APIkey</div>
+        <div class="dialog-desc">
+          <span
+            >需要openAI APIkey才能正常使用AI功能哦，<a
+              class="openai-link"
+              @click="
+                openExternal('https://platform.openai.com/account/api-keys')
+              "
+              >没有的在此处申请</a
+            >，此软件不会盗用您的个人信息，请放心填写</span
+          >
+          <el-form ref="form" style="margin-top: 15px">
+            <el-form-item>
+              <el-input
+                v-model="userApiKey"
+                placeholder="请填写你的openAI APIkey"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="dialog-footer">
+          <v-btn text @click="apikeyDialog = false" style="margin-right: 10px">
+            关闭
+          </v-btn>
+          <v-btn @click="start"> 就是现在，启动机器人 </v-btn>
+        </div>
+      </div>
+    </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch, Ref } from "vue-property-decorator";
 import { wxBot, wxBotInit } from "@/bot";
+import { setApiKey } from "@/bot/config";
 import Typewriter from "@/components/common/TypeWriter.vue";
 
 @Component({
@@ -146,9 +181,11 @@ import Typewriter from "@/components/common/TypeWriter.vue";
 export default class Login extends Vue {
   btnText = "";
   startLoading = false;
+  apikeyDialog = false;
   tipsText = "Let me help you!";
   dialog = false;
   welcomeDialog = true;
+  userApiKey = "";
 
   @Ref() readonly typewriter!: any;
 
@@ -183,8 +220,25 @@ export default class Login extends Vue {
     }
   }
 
+  openApikeyDialog() {
+    this.apikeyDialog = true;
+  }
+
   start() {
+    if (!this.userApiKey) {
+      this.$message.error("请填写你的APIkey~~");
+      return;
+    }
+    // const openaiApiKeyRegex = new RegExp(/^[A-Za-z0-9\-_]{32}$/);
+    // if (!openaiApiKeyRegex.test(this.userApiKey)) {
+    if (this.userApiKey.length < 25) {
+      this.$message.error("请填写正确的APIkey~~");
+      return;
+    }
+    setApiKey(this.userApiKey);
+
     this.startLoading = true;
+    this.apikeyDialog = false;
 
     this.$nextTick(() => {
       this.typewriter.replaceText({
@@ -350,6 +404,10 @@ export default class Login extends Vue {
 }
 .login-footer {
   width: 100%;
+}
+
+.openai-link {
+  color: rgb(145, 85, 253);
 }
 
 .github-link {

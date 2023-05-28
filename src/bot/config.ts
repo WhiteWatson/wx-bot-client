@@ -12,3 +12,8 @@ export const appPuppetList = {
     puppet: "wechaty-plugin-wecom",
   },
 };
+
+export const setApiKey = (apiKey: string) => {
+  chatGptConfig.APIKey = apiKey;
+  console.log('APIKey 更新成功');
+};

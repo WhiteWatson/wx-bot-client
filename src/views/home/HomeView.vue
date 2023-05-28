@@ -10,14 +10,7 @@
     <div class="text-body-1 mt-2">
       另外为了防止有人盗用ApiKey，我会不定时更新软件安装包，具体消息请加群了解
     </div>
-    <div class="img-box">
-      <img class="group-img" src="@/assets/groupimg.jpg" />
-      <img
-        class="gif-img"
-        src="https://oss-chatgpt.oss-cn-beijing.aliyuncs.com/attr/model.gif"
-      />
-    </div>
-    <v-btn elevation="2" @click="openExternal('https://t.zsxq.com/0csDtcatf')"
+    <v-btn class="mt-5" elevation="2" @click="openExternal('https://t.zsxq.com/0csDtcatf')"
       >加入作者的星球了解更多AI知识</v-btn
     >
   </div>

@@ -130,7 +130,7 @@ const startAI = async (
               await message.say(
                 `@${
                   message.talker()?.payload?.name
-                } 回复长度超长，微信最大支持1500字回复，请重新提问并限制回复长度，或者直接使用我的网页版分身 http://chat.bb2ff.top`
+                } 回复长度超长，微信最大支持1500字回复，请重新提问并限制回复长度。`
               );
               return;
             }
