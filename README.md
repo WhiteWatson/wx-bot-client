@@ -9,11 +9,24 @@
 [releases包下载地址](https://github.com/LittleCCB/wx-bot-client/releases)，在这里你可以下载到已经构建好的 **.exe安装包(windows)**，下载过程中下载软件可能提示文件不安全，可以忽略此提示，下载完成后本地安装即可。
 
 ### 托管你的微信
-打开软件，点击**开始使用吧**按钮，等待二维码出现，二维码出现后使用微信扫描二维码即可登录并托管微信。
+打开软件，点击**开始使用吧**按钮，在弹出的窗口填写你的openAI APIKey，
 
 ![markdown picture](./doc/images/one.png)
 
+![markdown picture](./doc/images/apikeyinput.png)
+
+填写完毕后点击**就是现在，启动机器人**，等待二维码出现，二维码出现后使用微信扫描二维码即可登录并托管微信。
+
 tips: 国内使用请挂梯子，否则API不通过，AI会一直处于思考状态
+
+### 机器人基本设置
+登录成功后进入机器人管理后台，在左侧点击**GPT设置**菜单，可以看到基础的机器人设置。
+
+在**AI触发词**修改机器人触发词
+
+在**AI群聊、AI私聊**处可以指定机器人服务的群聊或微信用户
+
+![markdown picture](./doc/images/gptsetting.png)
 
 ---
 ## 功能简介
@@ -29,9 +42,9 @@ tips: 国内使用请挂梯子，否则API不通过，AI会一直处于思考状
 ```
 提问格式： /image + 图片提示词
 
-例：/image Closeup face portrait of a girl, smooth soft skin, big dreamy eyes, beautiful intricate colored hair, symmetrical, anime wide eyes, soft lighting, detailed face, by makoto shinkai, stanley artgerm lau, wlop, rossdraws, concept art, digital painting, looking into camera
+例：/image 一个骑马的人
 ```
-
+tips: 由于AI容易生成违禁图片，因此机器人直接发送图片链接，且链接具有时效性
 ---
 
 ## 自定义部署
@@ -44,9 +57,6 @@ pnpm install
 
 ### 接入ChatGPT并本地运行项目：
 
-进入`/src/bot/config.ts`目录，将从[openAi官网API申请入口](https://platform.openai.com/account/api-keys)申请到`Organization`和`APIKey`的填写到`chatGptConfig`对象中
-
-
 ```
 npm run electron:serve
 ```
@@ -55,6 +65,11 @@ npm run electron:serve
 ```
 npm run electron:build
 ```
+### 在项目中配置openAI APIKey
+进入`/src/bot/config.ts`目录，将从[openAi官网API申请入口](https://platform.openai.com/account/api-keys)申请到`Organization`和`APIKey`的填写到`setApiKey`函数中
+
+### 如果遇到问题[可以先查阅此文档](./doc/problem.md)
+
 ---
 ## I'm a Computer Science and Engineering Student  
 
@@ -67,7 +82,6 @@ npm run electron:build
 ### Languages and Tools 🛠 
 
 ![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat-square&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
-![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=ffffff)
 ![HTML5](https://img.shields.io/badge/-HTML5-%23E44D27?style=flat-square&logo=html5&logoColor=ffffff)
 ![CSS3](https://img.shields.io/badge/-CSS3-%231572B6?style=flat-square&logo=css3)
 ![Sass](https://img.shields.io/badge/-Sass-%23CC6699?style=flat-square&logo=sass&logoColor=ffffff)
@@ -76,7 +90,6 @@ npm run electron:build
 ![Nodejs](https://img.shields.io/badge/-Nodejs-339933?style=flat-square&logo=Node.js&logoColor=ffffff)
 ![Npm](https://img.shields.io/badge/-npm-CB3837?style=flat-square&logo=npm)
 ![Git](https://img.shields.io/badge/-Git-%23F05032?style=flat-square&logo=git&logoColor=%23ffffff)
-![GitLab](https://img.shields.io/badge/-GitLab-FCA121?style=flat-square&logo=gitlab)
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github)
 ![VS Code](http://img.shields.io/badge/-VS%20Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=ffffff)
 ![Powershell](http://img.shields.io/badge/-Powershell-5391FE?style=flat-square&logo=powershell&logoColor=ffffff)
