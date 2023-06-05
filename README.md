@@ -52,8 +52,10 @@ tips: 由于AI容易生成违禁图片，因此机器人直接发送图片链接
 此项目本地运行依赖node环境
 
 ### 安装依赖
+
+请注意这里必须用 yarn 或者 pnpm 安装依赖
 ```
-pnpm install
+yarn install
 ```
 
 ### 接入ChatGPT并本地运行项目：
