@@ -88,7 +88,7 @@
           {{ new Date().getFullYear() }} — <strong>WxBotClient</strong>
           <a
             class="github-link"
-            @click="openExternal('https://github.com/LittleCCB/wx-bot-client')"
+            @click="openExternal('https://github.com/WhiteWatson/wx-bot-client')"
             href=""
             >GitHub</a
           >
