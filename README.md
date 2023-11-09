@@ -118,9 +118,7 @@ npm run electron:build
 ---
 ## 加群交流体验内测新功能
 
-<img src="https://web-ar.bj.bcebos.com/images/groupqrcode.jpg" alt="drawing" width="300"/>
-
-没有及时更新二维码请直接加我微信备注 "加ChatGPT群聊"
+加微信备注 "加ChatGPT群聊"
 
 微信号：okfine0520
 
