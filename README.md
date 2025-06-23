@@ -115,12 +115,4 @@ npm run electron:build
   
 <br/>
 
----
-## 加群交流体验内测新功能
-
-加微信备注 "加ChatGPT群聊"
-
-微信号：okfine0520
-
-<img src="https://web-ar.bj.bcebos.com/images/mywxqrcode.jpg" alt="drawing" width="300"/>
 
