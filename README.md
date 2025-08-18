@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=WhiteWatson&project=wx-bot-client&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 # Hi there, I'm WxBotClient <img width="30px" src="https://media.tenor.com/images/3b388fe03da271d2674faf85eb7c3fcd/tenor.gif" />
 我是一款开源的微信托管软件，基于electron、wechaty和vue开发，现已接入ChatGPT，编译出的安装包开箱即用，不依赖复杂环境，托管程序不随意掉线，稳定可靠。
 
